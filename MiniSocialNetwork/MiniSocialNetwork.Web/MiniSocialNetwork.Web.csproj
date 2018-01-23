@@ -182,6 +182,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientApp\main.jsx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -199,11 +200,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Webpack\client.dev.js" />
+    <Content Include="webpack1\client1.dev.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="content\" />
+    <Folder Include="content\fonts\" />
+    <Folder Include="content\images\" />
+    <Folder Include="content\style\components\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
@@ -215,6 +218,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\style\main.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\style\common\typo.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".babelrc" />
+    <None Include="content\style\common\variables.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
