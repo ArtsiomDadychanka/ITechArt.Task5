@@ -1,0 +1,28 @@
+{
+  "name": "minisocialnetwork",
+  "version": "1.0.0",
+  "description": "Mi\"\"\u001b[DMini social network application\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtsiomDadychanka/ITechArt.Task5.git"
+  },
+  "author": "Artsiom Dadychanka <artsiom.dadychanka@itechart-group.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtsiomDadychanka/ITechArt.Task5/issues"
+  },
+  "homepage": "https://github.com/ArtsiomDadychanka/ITechArt.Task5#readme",
+  "dependencies": {
+    "materialize-css": "1.0.0-alpha.3"
+  },
+  "devDependencies": {
+    "babel-preset-env": "7.0.0-beta.3",
+    "webpack": "3.10.0",
+    "eslint": "4.16.0",
+    "extract-text-webpack-plugin": "3.0.2"
+  }
+}
