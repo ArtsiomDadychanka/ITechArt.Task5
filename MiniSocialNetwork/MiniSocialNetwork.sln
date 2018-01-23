@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSocialNetwork.Web", "MiniSocialNetwork.Web\MiniSocialNetwork.Web.csproj", "{0AAED5EC-5325-429F-9726-8E16DA96C598}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSocialNetwork.Bll", "MiniSocialNetwork.Bll\MiniSocialNetwork.Bll.csproj", "{64ED0F6B-2716-4656-9F67-D7D5E8C2C159}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniSocialNetwork.Dal", "MiniSocialNetwork.Dal\MiniSocialNetwork.Dal.csproj", "{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0AAED5EC-5325-429F-9726-8E16DA96C598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AAED5EC-5325-429F-9726-8E16DA96C598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AAED5EC-5325-429F-9726-8E16DA96C598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64ED0F6B-2716-4656-9F67-D7D5E8C2C159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64ED0F6B-2716-4656-9F67-D7D5E8C2C159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64ED0F6B-2716-4656-9F67-D7D5E8C2C159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64ED0F6B-2716-4656-9F67-D7D5E8C2C159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
