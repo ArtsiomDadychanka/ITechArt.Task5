@@ -10,7 +10,7 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/../public/',
-        filename: './js/bundle.js'
+        filename: 'bundle.js'
     },
     module: {
         rules: [{
@@ -45,9 +45,5 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.jsx']
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
-    ]
+    }
 };

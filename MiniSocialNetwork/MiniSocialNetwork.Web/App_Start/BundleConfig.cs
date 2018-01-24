@@ -12,7 +12,7 @@ namespace MiniSocialNetwork.Web
                 "~/node_modules/materialize-css/dist/js/materialize.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
-                "~/public/js/bundle.js"));
+                "~/public/bundle.js"));
         }
     }
 }

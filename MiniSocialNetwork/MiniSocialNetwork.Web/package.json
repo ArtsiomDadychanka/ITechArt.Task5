@@ -4,7 +4,7 @@
   "description": "Mini social network application",
   "main": "index.js",
   "scripts": {
-    "build:client1": "webpack  --config webpack1/client1.dev.js"
+    "build:client": "webpack  --config Webpack/client.dev.js"
   },
   "repository": {
     "type": "git",
