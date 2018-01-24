@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
-    BrowserRouter,
+    HashRouter,
 } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
@@ -14,9 +14,9 @@ const render = (Component) => {
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>
-                <BrowserRouter>
+                <HashRouter>
                     <Component />
-                </BrowserRouter>
+                </HashRouter>
             </Provider>
         </AppContainer>,
         document.getElementById('app'),

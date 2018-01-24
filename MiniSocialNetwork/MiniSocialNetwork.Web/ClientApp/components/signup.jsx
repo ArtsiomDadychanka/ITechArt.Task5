@@ -8,7 +8,7 @@ const SingUp = () => {
         <h3 className="sign-up__app-name">Ramoo</h3>
         <hr className="sign-up__separator" />
         <h5 className="sign-up__title">Registration</h5>
-        <form action="">
+        <form>
           <div className="row">
             <div className="input-field col s6">
               <input
@@ -58,15 +58,15 @@ const SingUp = () => {
             </div>
           </div>
           <div className="sign-up__signup-btn row">
-            <button className="btn waves-effect waves-light col offset-s2 s8" type="submit" name="action">
+            <button className="btn waves-effect waves-light col offset-s2 s8" type="submit">
               Sign up
             </button>
           </div>
           <div className="row">
-            <p className="col offset-s5 s4">Have account?</p>
+            <p className="col offset-s4 s5">Have account?</p>
           </div>
           <div className="sign-up__signin-btn row ">
-            <Link to="Login" className="btn waves-effect waves-light col offset-s2 s8">
+            <Link to={{ hash: '#', pathname: '/' }} className="col offset-s5 s7">
               Log in
             </Link>
           </div>
