@@ -1,6 +1,11 @@
 ﻿@import '~normalize.css/normalize';
 @import '~materialize-css/dist/css/materialize.min.css';
-
 //common
 @import './common/variables';
 @import './common/typo';
+//components
+@import './components/header/primary-header';
+@import './components/footer/primary-footer';
+@import './components/logo/primary-logo';
+@import './components/login';
+@import './components/sign-up';
