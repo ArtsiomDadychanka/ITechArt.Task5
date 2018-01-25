@@ -7,7 +7,7 @@ import SignUp from './components/signup';
 import Profile from './components/profile';
 
 const App = () => (
-  <div>
+  <div className="app-container">
     <Header />
     <Switch>
       <Route exact path="/" component={Profile} />

@@ -11,6 +11,7 @@ namespace MiniSocialNetwork.Web
             bundles.Add(new ScriptBundle("~/bundles/materialize").Include(
                 "~/node_modules/materialize-css/dist/js/materialize.min.js"));
 
+
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
                 "~/public/bundle.js"));
         }

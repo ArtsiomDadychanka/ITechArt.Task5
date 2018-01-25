@@ -6,7 +6,7 @@ class ProfileSidebar extends React.Component {
 
   render() {
     return (
-      <div className="profile-sidebar col s2">
+      <div className="profile-sidebar col s2 blue-grey darken-2">
         <ProfileMainInfo />
         <ActivityBar />
       </div>

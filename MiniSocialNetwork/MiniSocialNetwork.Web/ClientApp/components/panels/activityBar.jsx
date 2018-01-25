@@ -6,10 +6,10 @@ const ActivityBar = () => {
       <h4 className="activity-bar__title">Activity</h4>
       <ul className="activity-bar__activities">
         <li className="activity-bar__activity">
-          About me
+          <a className="activity-bar__activity-link" href="#">About me</a>
         </li>
         <li className="activity-bar__activity">
-          Subscribers
+          <a className="activity-bar__activity-link" href="#">Subscribers</a>
         </li>
       </ul>
     </div>
