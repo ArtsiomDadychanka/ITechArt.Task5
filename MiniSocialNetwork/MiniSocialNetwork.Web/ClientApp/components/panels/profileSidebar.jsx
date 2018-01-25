@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileMainInfo from './profileMainInfo';
+import ProfileMainInfo from '../profileMainInfo';
 import ActivityBar from './activityBar';
 
 class ProfileSidebar extends React.Component {

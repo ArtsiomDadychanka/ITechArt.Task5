@@ -1,5 +1,7 @@
 import React from 'react';
-import ProfileSidebar from './profileSidebar';
+import ProfileSidebar from './panels/profileSidebar';
+import SubscribersSidebar from './panels/subscribersSidebar';
+import Wall from './wall';
 
 class Profile extends React.Component {
 
@@ -7,6 +9,8 @@ class Profile extends React.Component {
     return (
       <div className="profile row">
         <ProfileSidebar />
+        <Wall />
+        <SubscribersSidebar />
       </div>
     );
   }
