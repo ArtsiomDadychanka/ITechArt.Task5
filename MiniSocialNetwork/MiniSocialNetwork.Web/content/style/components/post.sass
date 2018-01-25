@@ -1,0 +1,42 @@
+.post 
+  padding: 25px 15px 25px 15px
+  margin: 0 !important
+  
+  &:nth-child(odd)
+    border-top: 1px solid #eeeeee
+    border-bottom: 1px solid #eeeeee
+  &:lst-child
+    border-bottom: 1px solid #eeeeee
+
+  &__content 
+    display: flex
+    flex-flow: column
+
+  &__author
+    font-weight: 500
+
+  &__date
+    padding: 10px 0
+
+    font-weight: 500
+    
+  &__buttons 
+    display: flex
+    justify-content: space-around
+
+  &__like
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__comment
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__counter
+    display: block
+
+    // padding-left: 10px
+
+    font-weight: 600

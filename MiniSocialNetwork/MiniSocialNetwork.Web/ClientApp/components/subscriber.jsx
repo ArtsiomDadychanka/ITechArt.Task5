@@ -1,15 +1,10 @@
 import React from 'react';
+import UserThumbnail from './userThumbnail';
 
 const Subscriber = ({ username = 'Username' }) => {
   return (
     <div className="subscriber row">
-      <a href="#" className="subscriber__thumbnail col s3" >
-        <img
-          className="subscriber__thumbnail-img"
-          src="../../content/images/fake-profile.jpg"
-          alt={username}
-        />
-      </a>
+      <UserThumbnail col={"s3"} />
       <div className="valign-wrapper">
         <a href="#" className="subscriber__username col s8">
           {username}
