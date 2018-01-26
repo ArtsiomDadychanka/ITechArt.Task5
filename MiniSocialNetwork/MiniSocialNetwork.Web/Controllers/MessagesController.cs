@@ -11,7 +11,7 @@ namespace MiniSocialNetwork.Web.Controllers
         // GET: UserMassages
         public ActionResult Index()
         {
-            return View();
+            return View("Messages");
         }
     }
 }

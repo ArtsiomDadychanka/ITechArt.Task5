@@ -11,7 +11,7 @@ namespace MiniSocialNetwork.Web.Controllers
         // GET: UserSettings
         public ActionResult Index()
         {
-            return View();
+            return View("Settings");
         }
     }
 }

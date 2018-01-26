@@ -11,7 +11,7 @@ namespace MiniSocialNetwork.Web.Controllers
         // GET: Subscribers
         public ActionResult Index()
         {
-            return View();
+            return View("Subscribers");
         }
     }
 }
