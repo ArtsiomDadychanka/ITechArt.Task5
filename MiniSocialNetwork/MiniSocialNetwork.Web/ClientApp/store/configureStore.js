@@ -11,7 +11,7 @@ import rootReducer from '../reducers/rootReducer';
 export default function configureStore(initState) {
   const logger = createLogger();
   const store = createStore(
-    () => {},
+    rootReducer,
     initState,
     applyMiddleware(logger, thunk));
   return store;
