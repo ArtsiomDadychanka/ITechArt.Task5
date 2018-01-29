@@ -7,8 +7,8 @@ export function signUp(userCredentials) {
       type: types.SIGN_UP_REQUEST,
       data: null
     });
-
-    fetch(`${global.SERVER_API_ADDRESS}/signup`, {
+    console.log(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.SIGNUP}`);
+    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.SIGNUP}`, {
         mode: 'cors',
         method: 'post',
         headers: {

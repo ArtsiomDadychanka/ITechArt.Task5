@@ -8,7 +8,7 @@ export function signIn(userCredentials) {
       data: null
     });
 
-    fetch(`${global.SERVER_API_ADDRESS}/auth`, {
+    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.SIGNIN}`, {
         mode: 'cors',
         method: 'post',
         headers: {
