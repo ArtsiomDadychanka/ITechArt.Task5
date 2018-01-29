@@ -9,7 +9,7 @@ namespace MiniSocialNetwork.Dal.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        ApplicationUserManager UserManager { get;}
+        ApplicationUserManager UserManager { get; }
         IUserProfileManager ProfileManager { get; }
         ApplicationRoleManager RoleManager { get; }
         Task SaveAsync();

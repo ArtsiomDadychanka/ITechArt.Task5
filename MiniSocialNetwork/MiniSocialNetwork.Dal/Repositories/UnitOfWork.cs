@@ -15,7 +15,7 @@ namespace MiniSocialNetwork.Dal.Repositories
     {
         private ApplicationContext db;
 
-        private readonly ApplicationUserManager userManager;
+        private ApplicationUserManager userManager;
         private readonly ApplicationRoleManager roleManager;
         private readonly IUserProfileManager profileManager;
 
