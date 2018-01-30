@@ -8,7 +8,7 @@ namespace MiniSocialNetwork.Dal.EF
     {
         static ApplicationContext()
         {
-            System.Data.Entity.Database.SetInitializer(new ContextInitializer());
+            //System.Data.Entity.Database.SetInitializer(new ContextInitializer());
         }
 
         public ApplicationContext(string connectionString) : base(connectionString)

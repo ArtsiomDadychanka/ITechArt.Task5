@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MiniSocialNetwork.Dal.EF;
@@ -13,9 +10,9 @@ namespace MiniSocialNetwork.Dal.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ApplicationContext db;
+        private readonly ApplicationContext db;
 
-        private ApplicationUserManager userManager;
+        private readonly ApplicationUserManager userManager;
         private readonly ApplicationRoleManager roleManager;
         private readonly IUserProfileManager profileManager;
 
@@ -36,14 +33,13 @@ namespace MiniSocialNetwork.Dal.Repositories
             await db.SaveChangesAsync();
         }
 
-
         #region Dispose
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        private bool disposed = false;
+        private bool disposed;
 
         public virtual void Dispose(bool disposing)
         {
