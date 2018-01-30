@@ -18,6 +18,7 @@ export function signUp(userCredentials) {
         body: JSON.stringify(userCredentials)
       })
       .then(res => {
+        alert(res)
         if (res.status === 200) {
           dispath({
             type: types.SIGN_UP_SUCCESS,
@@ -33,5 +34,6 @@ export function signUp(userCredentials) {
         }
       })
       .catch(err => console.log(err));
+    alert('end of action');
   };
 }

@@ -12,6 +12,7 @@ namespace MiniSocialNetwork.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("api/{controller}/{action}");
 
             routes.MapRoute(
                 name: "Default",

@@ -93,7 +93,7 @@ class SignIn extends React.Component {
                 </div>
             </div>
             <div className="login__signin-btn row">
-              <Link to={{ hash: '#', pathname: '/SignUp' }} className="col offset-s5 s7">
+              <Link to={{ pathname: '/SignUp' }} className="col offset-s5 s7">
                 Sign up
               </Link>
             </div>

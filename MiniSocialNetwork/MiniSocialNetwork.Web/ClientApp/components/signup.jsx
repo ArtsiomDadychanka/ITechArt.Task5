@@ -24,7 +24,6 @@ class SignUp extends React.Component {
 
   handleSignupClick = () => {
     const { signupActions } = this.props;
-    console.log(signupActions);
     const { signUp } = signupActions;
     const { firstname, lastname, email, password, repeatPassword } = this.state;
 
@@ -35,8 +34,8 @@ class SignUp extends React.Component {
       Password: password,
       RepeatPassword: repeatPassword
     };
-    console.log('regData');
     console.log(regData);
+    alert(regData);
     signUp(regData);
   };
 
@@ -44,6 +43,8 @@ class SignUp extends React.Component {
     const { redirectUrl } = this.props;
 
     if (redirectUrl) {
+      alert('in redirect')
+      alert(redirectUrl)
       window.location.assign(redirectUrl);
     }
 
@@ -120,7 +121,7 @@ class SignUp extends React.Component {
               <p className="col offset-s4 s5">Have account?</p>
             </div>
             <div className="sign-up__signin-btn row ">
-              <Link to={{ hash: '#', pathname: '/' }} className="col offset-s5 s7">
+              <Link to={{ pathname: '/' }} className="col offset-s5 s7">
                 Log in
               </Link>
             </div>
