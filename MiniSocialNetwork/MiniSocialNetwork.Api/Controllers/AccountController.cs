@@ -55,5 +55,22 @@ namespace MiniSocialNetwork.Api.Controllers
 
             return Ok();
         }
+        // TODO: temporary for role creating
+        [Route("createrole")]
+        public async Task<IHttpActionResult> Post()
+        {
+            OperationDetails operationDetails = await UserService.CreateRoleAsync();
+
+            if (!operationDetails.Succedeed)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(operationDetails.Message),
+                    ReasonPhrase = operationDetails.Message
+                };
+                throw new HttpResponseException(response);
+            }
+            return Ok();
+        }
     }
 }
