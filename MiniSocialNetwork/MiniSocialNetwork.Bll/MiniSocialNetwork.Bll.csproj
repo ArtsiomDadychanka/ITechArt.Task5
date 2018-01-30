@@ -70,6 +70,10 @@
       <Project>{4d2d0884-79fb-4a8c-a38f-a00cd9e818a5}</Project>
       <Name>MiniSocialNetwork.Dal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniSocialNetwork.Shared\MiniSocialNetwork.Shared.csproj">
+      <Project>{1e7fef2b-1610-4515-917b-918f45511bc6}</Project>
+      <Name>MiniSocialNetwork.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

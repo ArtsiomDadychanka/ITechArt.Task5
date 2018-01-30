@@ -4,19 +4,19 @@ namespace MiniSocialNetwork.Bll.DTO
 {
     public class UserDTO
     {
-        public String Firstname { get; set; }
-        public String Lastname { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public DateTime Birthday { get; set; }
-        public Boolean Sex { get; set; }
-        public String Hometown { get; set; }
-        public String Country { get; set; }
-        public String Interests { get; set; }
-        public String AboutMe { get; set; }
-        public String FavoriteMusic { get; set; }
-        public Byte[] Avatar { get; set; }
-        public String Role { get; set; }
+        public String Firstname { get; set; } = String.Empty;
+        public String Lastname { get; set; } = String.Empty;
+        public String Email { get; set; } = String.Empty;
+        public String Password { get; set; } = String.Empty;
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+        public DateTime Birthday { get; set; } = DateTime.Now;
+        public Boolean Sex { get; set; } = false;
+        public String Hometown { get; set; } = String.Empty;
+        public String Country { get; set; } = String.Empty;
+        public String Interests { get; set; } = String.Empty;
+        public String AboutMe { get; set; } = String.Empty;
+        public String FavoriteMusic { get; set; } = String.Empty;
+        public Byte[] Avatar { get; set; } = null;
+        public String Role { get; set; } = Shared.Constants.RolesNames.User;
     }
 }

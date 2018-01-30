@@ -11,6 +11,9 @@ namespace MiniSocialNetwork.Bll.Interfaces
 {
     public interface IUserService : IDisposable
     {
+        // TODO: temporary for role creating
+        Task<OperationDetails> CreateRoleAsync();
+
         Task<OperationDetails> CreateAsync(UserDTO user);
         Task<ClaimsIdentity> AuthenticateAsync(UserDTO user);
     }

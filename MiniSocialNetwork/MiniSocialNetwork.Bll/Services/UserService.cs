@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MiniSocialNetwork.Bll.DTO;
 using MiniSocialNetwork.Bll.Infrastructure;
 using MiniSocialNetwork.Bll.Interfaces;
@@ -27,21 +28,47 @@ namespace MiniSocialNetwork.Bll.Services
             if (appUser == null)
             {
                 appUser = Mapper.Map<UserDTO, ApplicationUser>(user);
-                var result = await Uow.UserManager.CreateAsync(appUser);
+                var result = await Uow.UserManager.CreateAsync(appUser, user.Password);
                 if (result.Errors.Any())
                 {
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
                 }
                 await Uow.UserManager.AddToRoleAsync(appUser.Id, user.Role);
                 
-                UserProfile userProfile = Mapper.Map<UserDTO, UserProfile>(user);
-                Uow.ProfileManager.Create(userProfile);
+                CreateUserProfile(appUser.Id, user);
 
                 await Uow.SaveAsync();
 
                 return new OperationDetails(true, "Registration successfully completed!", "");
             }
             return new OperationDetails(false, "A user with this login already exists!", "Email");
+        }
+        // TODO: temporary for role creating
+        public async Task<OperationDetails> CreateRoleAsync()
+        {
+            try
+            {
+                await Uow.RoleManager.CreateAsync(
+                    new UserRole()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "User"
+                    });
+
+                await Uow.RoleManager.CreateAsync(
+                    new UserRole()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "Admin"
+                    });
+
+                await Uow.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                return new OperationDetails(false, e.Message, "");
+            }
+            return new OperationDetails(true, "", "");
         }
 
         public async Task<ClaimsIdentity> AuthenticateAsync(UserDTO userDto)
@@ -59,6 +86,14 @@ namespace MiniSocialNetwork.Bll.Services
         public void Dispose()
         {
             Uow.Dispose();
+        }
+
+        private void CreateUserProfile(string id, UserDTO user)
+        {
+            UserProfile userProfile = Mapper.Map<UserDTO, UserProfile>(user);
+            userProfile.Id = id;
+
+            Uow.ProfileManager.Create(userProfile);
         }
     }
 }
