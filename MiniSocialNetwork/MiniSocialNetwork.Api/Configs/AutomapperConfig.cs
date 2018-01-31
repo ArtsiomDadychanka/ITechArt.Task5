@@ -15,11 +15,24 @@ namespace MiniSocialNetwork.Api.Configs
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<RegisterViewModel, UserDTO>();
-                cfg.CreateMap<UserDTO, UserProfile>();
-                cfg.CreateMap<UserDTO, ApplicationUser>()
-                    .ForMember("UserName", opt => opt.MapFrom(f => f.Email));
+                CreateMapFromApiToBlLayer(cfg);
+                CreateMapFromBlToDaLayer(cfg);
             });
+        }
+
+        private static void CreateMapFromApiToBlLayer(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<LoginViewModel, UserDTO>();
+            cfg.CreateMap<RegisterViewModel, UserDTO>();
+            cfg.CreateMap<PostViewModel, PostDTO>();
+        }
+
+        private static void CreateMapFromBlToDaLayer(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<PostDTO, Post>();
+            cfg.CreateMap<UserDTO, UserProfile>();
+            cfg.CreateMap<UserDTO, ApplicationUser>()
+                .ForMember("UserName", opt => opt.MapFrom(f => f.Email));
         }
     }
 }

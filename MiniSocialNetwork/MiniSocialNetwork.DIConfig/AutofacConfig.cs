@@ -12,24 +12,11 @@ namespace MiniSocialNetwork.DIConfig
     {
         //private static string connectionString = new 
         //    @"Data Source=.;Initial Catalog=SocialNetwork;Integrated Security=True;providerName=System.Data.SqlClient";
-        public static void Register(ContainerBuilder builder)
-        {
-            builder.RegisterType<UnitOfWork>()
-                .As<IUnitOfWork>()
-                .WithParameter("connectionString", GetConnectionString());
-
-            builder.RegisterType<UserService>()
-                .As<IUserService>();
-        }
+        
 
         private static string GetConnectionString()
         {
-            return new SqlConnectionStringBuilder
-            {
-                InitialCatalog = "SocialNetwork",
-                DataSource = ".",
-                IntegratedSecurity = true
-            }.ConnectionString;
+            return 
         }
     }
 }

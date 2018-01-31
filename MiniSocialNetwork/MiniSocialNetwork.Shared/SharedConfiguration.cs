@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,12 @@ namespace MiniSocialNetwork.Shared
     {
         static SharedConfiguration()
         {
-            ConnectionString =
-                @"Data Source=(localdb)\v17.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True;";
+            ConnectionString = new SqlConnectionStringBuilder
+            {
+                InitialCatalog = "SocialNetwork",
+                DataSource = ".",
+                IntegratedSecurity = true
+            }.ConnectionString;
         }
 
         public static String ConnectionString { get; } 

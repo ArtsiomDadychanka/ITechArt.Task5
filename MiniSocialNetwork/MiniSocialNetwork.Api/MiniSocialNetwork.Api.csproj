@@ -67,6 +67,9 @@
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
@@ -149,8 +152,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configs\AutofacConfig.cs" />
     <Compile Include="Configs\AutomapperConfig.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -178,9 +184,9 @@
       <Project>{4D2D0884-79FB-4A8C-A38F-A00CD9E818A5}</Project>
       <Name>MiniSocialNetwork.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MiniSocialNetwork.DIConfig\MiniSocialNetwork.DIConfig.csproj">
-      <Project>{f9cac893-1662-4503-af81-2d88cf87e30b}</Project>
-      <Name>MiniSocialNetwork.DIConfig</Name>
+    <ProjectReference Include="..\MiniSocialNetwork.Shared\MiniSocialNetwork.Shared.csproj">
+      <Project>{1e7fef2b-1610-4515-917b-918f45511bc6}</Project>
+      <Name>MiniSocialNetwork.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

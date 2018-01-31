@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Entities;
 using MiniSocialNetwork.Dal.Identity;
@@ -12,21 +14,26 @@ namespace MiniSocialNetwork.Dal.Repositories
     {
         private readonly ApplicationContext db;
 
-        private readonly ApplicationUserManager userManager;
-        private readonly ApplicationRoleManager roleManager;
-        private readonly IUserProfileManager profileManager;
-
         public UnitOfWork(string connectionString)
         {
             db = new ApplicationContext(connectionString);
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
-            roleManager = new ApplicationRoleManager(new RoleStore<UserRole>(db));
-            profileManager = new ProfileManagerRepository(db);
+            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            RoleManager = new ApplicationRoleManager(new RoleStore<UserRole>(db));
+            ProfileManager = new ProfileManagerRepository(db);
+            PostRepository = new PostRepository(db);
         }
 
-        public ApplicationUserManager UserManager => userManager;
-        public ApplicationRoleManager RoleManager => roleManager;
-        public IUserProfileManager ProfileManager => profileManager;
+        //public static UnitOfWork CreateManager(IdentityFactoryOptions<ApplicationUserManager> options,
+        //    IOwinContext context)
+        //{
+        //    //return new UnitOfWork();
+        //    ApplicationUserManager.Create(options, context);
+        //}
+
+        public ApplicationUserManager UserManager { get; }
+        public ApplicationRoleManager RoleManager { get; }
+        public IUserProfileManager ProfileManager { get; }
+        public IPostRepository PostRepository { get; }
 
         public async Task SaveAsync()
         {
@@ -47,9 +54,9 @@ namespace MiniSocialNetwork.Dal.Repositories
             {
                 if (disposing)
                 {
-                    userManager.Dispose();
-                    roleManager.Dispose();
-                    profileManager.Dispose();
+                    UserManager.Dispose();
+                    RoleManager.Dispose();
+                    ProfileManager.Dispose();
                 }
                 this.disposed = true;
             }

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using MiniSocialNetwork.Bll.DTO;
 using MiniSocialNetwork.Bll.Infrastructure;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Dal.Entities;
+using MiniSocialNetwork.Dal.Identity;
 using MiniSocialNetwork.Dal.Interfaces;
 using MiniSocialNetwork.Dal.Repositories;
 
@@ -21,6 +25,12 @@ namespace MiniSocialNetwork.Bll.Services
         public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
+        //public static UserService CreateService(IdentityFactoryOptions<ApplicationUserManager> options,
+        //    IOwinContext context)
+        //{
+        //    return new UserService(UnitOfWork.CreateManager(options, context));
+        //}
 
         public async Task<OperationDetails> CreateAsync(UserDTO user)
         {

@@ -16,7 +16,8 @@ using MiniSocialNetwork.Api;
 using MiniSocialNetwork.Api.Configs;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Bll.Services;
-using MiniSocialNetwork.DIConfig;
+using MiniSocialNetwork.Dal.EF;
+using MiniSocialNetwork.Dal.Identity;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -24,24 +25,24 @@ namespace MiniSocialNetwork.Api
 {
     public class Startup
     {
+        private IContainer container;
         public void Configuration(IAppBuilder app)
         {
             AutomapperConfig.Initialize();
 
-            var builder = new ContainerBuilder();
+            container = ConfigureDIContainer();
 
             var httpConfig = new HttpConfiguration();
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            AutofacConfig.Register(builder);
-
             ConfigureOAuthTokenGeneration(app);
             ConfigureWebApi(httpConfig);
             app.UseCors(CorsOptions.AllowAll);
+            //httpConfig.DependencyResolver.GetServices(typeof(IUserService)).FirstOrDefault
+            //app.CreatePerOwinContext<ApplicationContext>(ApplicationContext.Create);
+            //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            //app.CreatePerOwinContext()
 
-            var container = builder.Build();
-            app.CreatePerOwinContext<IUserService>(CreateUserService(container));
             httpConfig.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
+            
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(httpConfig);
             app.UseWebApi(httpConfig);
@@ -61,12 +62,6 @@ namespace MiniSocialNetwork.Api
 
         }
 
-        // TODO
-        private Func<IUserService> CreateUserService(IContainer container)
-        {
-            return container.Resolve<IUserService>;
-        }
-
         private void ConfigureWebApi(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
@@ -81,6 +76,13 @@ namespace MiniSocialNetwork.Api
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        }
+
+        private IContainer ConfigureDIContainer()
+        {
+            var builder = new ContainerBuilder();
+            AutofacConfig.Register(builder);
+            return builder.Build();
         }
     }
 }

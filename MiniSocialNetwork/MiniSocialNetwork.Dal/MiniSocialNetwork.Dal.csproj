@@ -76,14 +76,35 @@
   <ItemGroup>
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="EF\ContextInitializer.cs" />
+    <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Interfaces\IPostRepository.cs" />
     <Compile Include="Interfaces\IUserProfileManager.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Exception\PostNotFoundException.cs" />
+    <Compile Include="Migrations\201801301659108_AddUserPostsMigration.cs" />
+    <Compile Include="Migrations\201801301659108_AddUserPostsMigration.Designer.cs">
+      <DependentUpon>201801301659108_AddUserPostsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301707151_AddUserPostsMigration1.cs" />
+    <Compile Include="Migrations\201801301707151_AddUserPostsMigration1.Designer.cs">
+      <DependentUpon>201801301707151_AddUserPostsMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301708170_AddUserPostsMigration2.cs" />
+    <Compile Include="Migrations\201801301708170_AddUserPostsMigration2.Designer.cs">
+      <DependentUpon>201801301708170_AddUserPostsMigration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310753107_UpdatePostModel.cs" />
+    <Compile Include="Migrations\201801310753107_UpdatePostModel.Designer.cs">
+      <DependentUpon>201801310753107_UpdatePostModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileManagerRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
   </ItemGroup>
@@ -91,6 +112,19 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801301659108_AddUserPostsMigration.resx">
+      <DependentUpon>201801301659108_AddUserPostsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301707151_AddUserPostsMigration1.resx">
+      <DependentUpon>201801301707151_AddUserPostsMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301708170_AddUserPostsMigration2.resx">
+      <DependentUpon>201801301708170_AddUserPostsMigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310753107_UpdatePostModel.resx">
+      <DependentUpon>201801310753107_UpdatePostModel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

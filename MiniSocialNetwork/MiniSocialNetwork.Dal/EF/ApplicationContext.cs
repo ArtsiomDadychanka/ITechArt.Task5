@@ -11,11 +11,21 @@ namespace MiniSocialNetwork.Dal.EF
             //System.Data.Entity.Database.SetInitializer(new ContextInitializer());
         }
 
-        public ApplicationContext(string connectionString) : base(connectionString)
+        public ApplicationContext()
         {
             
         }
 
+        public ApplicationContext(string connectionString) : base(connectionString)
+        {
+        }
+
+        public static ApplicationContext Create()
+        {
+            return new ApplicationContext();
+        }
+
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Post> UserPosts { get; set; }
     }
 }

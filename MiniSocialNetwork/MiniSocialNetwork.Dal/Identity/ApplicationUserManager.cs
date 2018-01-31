@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Entities;
 
 namespace MiniSocialNetwork.Dal.Identity
@@ -18,12 +19,12 @@ namespace MiniSocialNetwork.Dal.Identity
         {
         }
 
-        //public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
-        //{
-        //    var appDbContext = context.Get<ApplicationDbContext>();
-        //    var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        {
+            var appDbContext = context.Get<ApplicationContext>();
+            var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
 
-        //    return appUserManager;
-        //}
+            return appUserManager;
+        }
     }
 }
