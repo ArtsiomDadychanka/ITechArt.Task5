@@ -12,5 +12,8 @@ namespace MiniSocialNetwork.Dal.Interfaces
         void Create(Post post);
         void DeleteAsync(String id);
         IQueryable<Post> GetAll();
+        IQueryable<Post> GetUsersPosts(String id);
+        void Like(String postId);
+        void Unlike(String postId);
     }
 }

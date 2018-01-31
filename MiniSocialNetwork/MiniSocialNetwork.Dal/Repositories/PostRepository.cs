@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,35 @@ namespace MiniSocialNetwork.Dal.Repositories
         public IQueryable<Post> GetAll()
         {
             return Database.UserPosts.AsNoTracking();
+        }
+
+        public IQueryable<Post> GetUsersPosts(String id)
+        {
+            return Database.UserPosts.Where(p => p.AuthorId == id).AsNoTracking();
+        }
+
+        public async void Like(String postId)
+        {
+            Post likedPost = await Database.UserPosts.FindAsync(postId);
+            if (likedPost == null)
+            {
+                throw new PostNotFoundException();
+            }
+
+            likedPost.Likes += 1;
+        }
+        public async void Unlike(String postId)
+        {
+            Post unlikedPost = await Database.UserPosts.FindAsync(postId);
+            if (unlikedPost == null)
+            {
+                throw new PostNotFoundException();
+            }
+
+            if (unlikedPost.Likes > 0)
+            {
+                unlikedPost.Likes -= 1;
+            }
         }
     }
 }
