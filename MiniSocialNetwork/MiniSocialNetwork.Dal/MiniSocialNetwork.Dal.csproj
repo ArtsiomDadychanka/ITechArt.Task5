@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="EF\ApplicationContext.cs" />
     <Compile Include="EF\ContextInitializer.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />

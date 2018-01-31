@@ -14,21 +14,14 @@ namespace MiniSocialNetwork.Dal.Repositories
     {
         private readonly ApplicationContext db;
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork(ApplicationContext context)
         {
-            db = new ApplicationContext(connectionString);
+            db = context;
             UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
             RoleManager = new ApplicationRoleManager(new RoleStore<UserRole>(db));
             ProfileManager = new ProfileManagerRepository(db);
             PostRepository = new PostRepository(db);
         }
-
-        //public static UnitOfWork CreateManager(IdentityFactoryOptions<ApplicationUserManager> options,
-        //    IOwinContext context)
-        //{
-        //    //return new UnitOfWork();
-        //    ApplicationUserManager.Create(options, context);
-        //}
 
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
