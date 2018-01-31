@@ -20,7 +20,6 @@ namespace MiniSocialNetwork.Api.Controllers
     //[Authorize]
     public class PostsController : ApiController
     {
-        private IAuthenticationManager AuthenticationManager => Request.GetOwinContext().Authentication;
         private IPostService postService;
 
         public PostsController(IPostService postService)
@@ -64,22 +63,39 @@ namespace MiniSocialNetwork.Api.Controllers
             return Ok();
         }
 
-        [Route("")]
-        public async Task<IHttpActionResult> Get()
+        /// <summary>
+        /// Get users post
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("{id:Guid}")]
+        public async Task<IHttpActionResult> Get(Guid id)
         {
-            //return Ok(postService.GetPosts());
-            //return Ok(new
-            //{
-            //    Name = AuthenticationManager.User.Identity.Name,
-            //    Id = AuthenticationManager.User.Identity.GetUserId(),
-            //    Auth = AuthenticationManager.User.Identity.IsAuthenticated
-            //});
-            return Ok(new
+            return Ok(postService.GetUsersPosts(id.ToString()));
+        }
+
+        [Route("{id:Guid}/like")]
+        [HttpPut]
+        public async Task<IHttpActionResult> Like(Guid postId)
+        {
+            var result = await postService.Like(postId.ToString());
+            if (!result.Succedeed)
             {
-                Name = User.Identity.Name,
-                Auth = User.Identity.IsAuthenticated,
-                Id = User.Identity.GetUserId()
-            });
+                return InternalServerError();
+            }
+            return Ok();
+        }
+
+        [Route("{id:Guid}/unlike")]
+        [HttpPut]
+        public async Task<IHttpActionResult> Unlike(Guid postId)
+        {
+            var result = await postService.Unlike(postId.ToString());
+            if (!result.Succedeed)
+            {
+                return InternalServerError();
+            }
+            return Ok();
         }
     }
 }
