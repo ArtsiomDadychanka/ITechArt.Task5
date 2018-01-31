@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace MiniSocialNetwork.Dal.Entities
 {
-    public class Post
+    public class Comment
     {
         [Key]
         public String Id { get; set; } = Guid.Empty.ToString();
         public String AuthorName { get; set; } = String.Empty;
         public String Text { get; set; } = String.Empty;
-        public Int32 Likes { get; set; } = 0;
         public DateTime PostedTime { get; set; } = DateTime.Now;
-        [ForeignKey("UserProfile")]
-        public String AuthorId { get; set; }
+        [ForeignKey("Post")]
+        public String PostId { get; set; }
 
-        public virtual UserProfile UserProfile { get; set; }
+        public virtual Post Post { get; set; }
     }
 }
