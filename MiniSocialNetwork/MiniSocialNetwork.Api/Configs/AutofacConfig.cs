@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Bll.Services;
+using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Interfaces;
 using MiniSocialNetwork.Dal.Repositories;
 using MiniSocialNetwork.Shared;
@@ -35,13 +36,13 @@ namespace MiniSocialNetwork.Api.Configs
         }
         private static void RegisterDlLayer(ContainerBuilder builder)
         {
-            //builder.RegisterAssemblyTypes(typeof(PostRepository).Assembly)
-            //   .Where(t => t.Name.EndsWith("Repository"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterType<ApplicationContext>()
+                .AsSelf()
+                .WithParameter("connectionString", SharedConfiguration.ConnectionString)
+                .InstancePerRequest();
 
             builder.RegisterType<UnitOfWork>()
                 .As<IUnitOfWork>()
-                .WithParameter("connectionString", SharedConfiguration.ConnectionString)
                 .InstancePerRequest();
         }
     }
