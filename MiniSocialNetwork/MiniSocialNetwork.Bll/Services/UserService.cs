@@ -26,12 +26,6 @@ namespace MiniSocialNetwork.Bll.Services
         {
         }
 
-        //public static UserService CreateService(IdentityFactoryOptions<ApplicationUserManager> options,
-        //    IOwinContext context)
-        //{
-        //    return new UserService(UnitOfWork.CreateManager(options, context));
-        //}
-
         public async Task<OperationDetails> CreateAsync(UserDTO user)
         {
             ApplicationUser appUser = await Uow.UserManager.FindByEmailAsync(user.Email);
@@ -90,12 +84,8 @@ namespace MiniSocialNetwork.Bll.Services
             if (user != null)
                 claim = await Uow.UserManager.CreateIdentityAsync(user,
                     DefaultAuthenticationTypes.ApplicationCookie);
-            return claim;
-        }
 
-        public void Dispose()
-        {
-            Uow.Dispose();
+            return claim;
         }
 
         private void CreateUserProfile(string id, UserDTO user)
@@ -105,5 +95,12 @@ namespace MiniSocialNetwork.Bll.Services
 
             Uow.ProfileManager.Create(userProfile);
         }
+
+        #region Dispose
+        public void Dispose()
+        {
+            Uow.Dispose();
+        }
+        #endregion
     }
 }

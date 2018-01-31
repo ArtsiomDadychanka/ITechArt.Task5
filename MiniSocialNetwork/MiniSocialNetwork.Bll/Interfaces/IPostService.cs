@@ -13,5 +13,8 @@ namespace MiniSocialNetwork.Bll.Interfaces
         Task<OperationDetails> CreatePostAsync(PostDTO post);
         Task<OperationDetails> RemovePostAsync(string id);
         IEnumerable<PostDTO> GetPosts();
+        IEnumerable<PostDTO> GetUsersPosts(String id);
+        Task<OperationDetails> Like(String postId);
+        Task<OperationDetails> Unlike(String postId);
     }
 }

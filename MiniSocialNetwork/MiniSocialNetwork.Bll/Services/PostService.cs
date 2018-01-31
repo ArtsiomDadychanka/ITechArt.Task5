@@ -20,7 +20,6 @@ namespace MiniSocialNetwork.Bll.Services
 
         }
 
-
         public async Task<OperationDetails> CreatePostAsync(PostDTO post)
         {
             Uow.PostRepository.Create(Mapper.Map<PostDTO, Post>(post));
@@ -36,7 +35,13 @@ namespace MiniSocialNetwork.Bll.Services
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(posts);
         }
 
-        public async Task<OperationDetails> RemovePostAsync(string id)
+        public IEnumerable<PostDTO> GetUsersPosts(String id)
+        {
+            IEnumerable<Post> posts = Uow.PostRepository.GetUsersPosts(id).AsEnumerable();
+            return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(posts);
+        }
+
+        public async Task<OperationDetails> RemovePostAsync(String id)
         {
             try
             {
@@ -50,6 +55,23 @@ namespace MiniSocialNetwork.Bll.Services
             await Uow.SaveAsync();
 
             return new OperationDetails(true, "Post deleted successfully.", "");
+        }
+
+        public async Task<OperationDetails> Like(String postId)
+        {
+            Uow.PostRepository.Like(postId);
+
+            await Uow.SaveAsync();
+
+            return new OperationDetails(true, "Post liked successfully.", "");
+        }
+
+        public async Task<OperationDetails> Unlike(String postId)
+        {
+            Uow.PostRepository.Unlike(postId);
+            await Uow.SaveAsync();
+
+            return new OperationDetails(true, "Post unliked successfully.", "");
         }
     }
 }
