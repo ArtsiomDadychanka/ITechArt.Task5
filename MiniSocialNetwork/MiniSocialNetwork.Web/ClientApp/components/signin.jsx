@@ -35,11 +35,10 @@ class SignIn extends React.Component {
     const { login, password } = this.state;
 
     let userCredentials = {
-      Email: login,
-      Password: password
+      username: login,
+      password: password
     };
-    console.log('User cred');
-    console.log(userCredentials);
+
     signIn(userCredentials);
   }
 

@@ -1,4 +1,4 @@
-import * as types from '../constants/actionTypes';
+import * as types from '../actions/actionTypes';
 
 export default function signReducer(state = {}, action) {
   switch (action.type) {
