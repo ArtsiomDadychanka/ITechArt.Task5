@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web;
 using Autofac;
 using Autofac.Integration.WebApi;
+using MiniSocialNetwork.Api.Providers;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Bll.Services;
 using MiniSocialNetwork.Dal.EF;
@@ -26,24 +27,32 @@ namespace MiniSocialNetwork.Api.Configs
         private static void RegisterApiLayer(ContainerBuilder builder)
         {
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterType<AuthorizationServerProvider>()
+                .AsSelf();
+
+            builder.RegisterType<Startup>()
+                .AsSelf()
+                .PropertiesAutowired();
         }
 
         private static void RegisterServices(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(UserService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
-                .AsImplementedInterfaces().InstancePerRequest();
+                .AsImplementedInterfaces();
+            //.InstancePerRequest();
         }
         private static void RegisterDlLayer(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationContext>()
                 .AsSelf()
-                .WithParameter("connectionString", SharedConfiguration.ConnectionString)
-                .InstancePerRequest();
+                .WithParameter("connectionString", SharedConfiguration.ConnectionString);
+                //.InstancePerRequest();
 
             builder.RegisterType<UnitOfWork>()
-                .As<IUnitOfWork>()
-                .InstancePerRequest();
+                .As<IUnitOfWork>();
+            //.InstancePerRequest();
         }
     }
 }
