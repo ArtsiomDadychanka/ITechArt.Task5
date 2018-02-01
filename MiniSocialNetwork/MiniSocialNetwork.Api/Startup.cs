@@ -12,8 +12,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
 using MiniSocialNetwork.Api;
 using MiniSocialNetwork.Api.Configs;
+using MiniSocialNetwork.Api.Providers;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Bll.Services;
 using MiniSocialNetwork.Dal.EF;
@@ -26,20 +28,22 @@ namespace MiniSocialNetwork.Api
     public class Startup
     {
         private IContainer container;
+        public AuthorizationServerProvider AuthorizationServerProvider { get; set; }
+
         public void Configuration(IAppBuilder app)
         {
             AutomapperConfig.Initialize();
 
             container = ConfigureDIContainer();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                AuthorizationServerProvider = container.Resolve<AuthorizationServerProvider>();
+            }
 
             var httpConfig = new HttpConfiguration();
-            ConfigureOAuthTokenGeneration(app);
+            ConfigureOAuth(app);
             ConfigureWebApi(httpConfig);
             app.UseCors(CorsOptions.AllowAll);
-            //httpConfig.DependencyResolver.GetServices(typeof(IUserService)).FirstOrDefault
-            //app.CreatePerOwinContext<ApplicationContext>(ApplicationContext.Create);
-            //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            //app.CreatePerOwinContext()
 
             httpConfig.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             
@@ -48,17 +52,18 @@ namespace MiniSocialNetwork.Api
             app.UseWebApi(httpConfig);
         }
 
-        // TODO
-        private void ConfigureOAuthTokenGeneration(IAppBuilder app)
+        private void ConfigureOAuth(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
-            //app.CreatePerOwinContext<IUserService>(CreateUserService);
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            OAuthAuthorizationServerOptions oAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions()
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"), // TODO ???
-            });
-            // Plugin the OAuth bearer JSON Web Token tokens generation and Consumption will be here
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                Provider = AuthorizationServerProvider
+            };
+
+            app.UseOAuthAuthorizationServer(oAuthAuthorizationServerOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
         }
 
