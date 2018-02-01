@@ -12,7 +12,6 @@ namespace MiniSocialNetwork.Dal.Entities
     {
         [Key]
         public String Id { get; set; } = Guid.Empty.ToString();
-        public String AuthorName { get; set; } = String.Empty;
         public String Text { get; set; } = String.Empty;
         public DateTime PostedTime { get; set; } = DateTime.Now;
         [ForeignKey("Post")]

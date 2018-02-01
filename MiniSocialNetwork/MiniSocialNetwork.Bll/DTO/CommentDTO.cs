@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniSocialNetwork.Bll.DTO
 {
-    public class PostDTO
+    public class CommentDTO
     {
         public String Id { get; set; } = Guid.Empty.ToString();
         public String Text { get; set; } = String.Empty;

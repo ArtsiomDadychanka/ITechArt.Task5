@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,5 +23,11 @@ namespace MiniSocialNetwork.Dal.Entities
         public Byte[] Avatar { get; set; } = null;
 
         public  virtual  ApplicationUser ApplicationUser { get; set; }
+        public ICollection<Post> Posts { get; set; }
+
+        public UserProfile()
+        {
+            Posts = new List<Post>();
+        }
     }
 }

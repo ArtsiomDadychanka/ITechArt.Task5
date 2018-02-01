@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace MiniSocialNetwork.Api.Models
 {
-    public class PostViewModel
+    public class CreatedPostViewModel
     {
-        [Required(ErrorMessage = "This field is required.")]
-        [DataType(DataType.Text)]
-        public String AuthorName { get; set; }
-
         [Required(ErrorMessage = "AuthorId is required")]
         public String AuthorId { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
+        [MinLength(1, ErrorMessage = "Text of post is empty.")]
         [DataType(DataType.Text)]
         public String Text { get; set; }
     }

@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
 using MiniSocialNetwork.Api.Models;
 using MiniSocialNetwork.Bll.DTO;
 using MiniSocialNetwork.Bll.Interfaces;
@@ -28,14 +21,14 @@ namespace MiniSocialNetwork.Api.Controllers
         }
         
         [Route("")]
-        public async Task<IHttpActionResult> Post([FromBody] PostViewModel post)
+        public async Task<IHttpActionResult> Post([FromBody] CreatedPostViewModel post)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await postService.CreatePostAsync(Mapper.Map<PostViewModel, PostDTO>(post));
+            var result = await postService.CreatePostAsync(Mapper.Map<CreatedPostViewModel, PostDTO>(post));
 
             if (!result.Succedeed)
             {
@@ -71,7 +64,11 @@ namespace MiniSocialNetwork.Api.Controllers
         [Route("{id:Guid}")]
         public async Task<IHttpActionResult> Get(Guid id)
         {
-            return Ok(postService.GetUsersPosts(id.ToString()));
+            var posts = postService.GetUsersPosts(id.ToString());
+            IEnumerable<DisplayedPostViewModel> displayedPosts =
+                Mapper.Map<IEnumerable<PostDTO>, IEnumerable<DisplayedPostViewModel>>(posts);
+
+            return Ok(displayedPosts);
         }
 
         [Route("{id:Guid}/like")]

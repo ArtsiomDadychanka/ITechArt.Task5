@@ -12,7 +12,6 @@ namespace MiniSocialNetwork.Dal.Entities
     {
         [Key]
         public String Id { get; set; } = Guid.Empty.ToString();
-        public String AuthorName { get; set; } = String.Empty;
         public String Text { get; set; } = String.Empty;
         public Int32 Likes { get; set; } = 0;
         public DateTime PostedTime { get; set; } = DateTime.Now;
@@ -20,5 +19,12 @@ namespace MiniSocialNetwork.Dal.Entities
         public String AuthorId { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        public Post()
+        {
+            Comments = new List<Comment>();
+        }
+
     }
 }
