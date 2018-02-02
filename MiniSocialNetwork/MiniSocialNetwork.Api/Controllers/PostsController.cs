@@ -39,21 +39,21 @@ namespace MiniSocialNetwork.Api.Controllers
         }
 
         [Route("")]
-        public async Task<IHttpActionResult> Delete(string id)
+        public async Task<IHttpActionResult> Delete(Guid id)
         {
-            if (string.IsNullOrWhiteSpace(id))
+            if (id.Equals(Guid.Empty))
             {
-                return BadRequest();
+                return BadRequest("Invalid post id");
             }
 
-            var result = await postService.RemovePostAsync(id);
+            var result = await postService.RemovePostAsync(id.ToString());
 
             if (!result.Succedeed)
             {
                 return BadRequest(result.Message);
             }
 
-            return Ok();
+            return Ok(result.Message);
         }
 
         /// <summary>
@@ -64,7 +64,12 @@ namespace MiniSocialNetwork.Api.Controllers
         [Route("{id:Guid}")]
         public async Task<IHttpActionResult> Get(Guid id)
         {
-            var posts = postService.GetUsersPosts(id.ToString());
+            if (id.Equals(Guid.Empty))
+            {
+                return BadRequest("Invalid user id");
+            }
+
+            var posts = await postService.GetUsersPostsAsync(id.ToString());
             IEnumerable<DisplayedPostViewModel> displayedPosts =
                 Mapper.Map<IEnumerable<PostDTO>, IEnumerable<DisplayedPostViewModel>>(posts);
 
@@ -75,24 +80,34 @@ namespace MiniSocialNetwork.Api.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> Like(Guid postId)
         {
+            if (postId.Equals(Guid.Empty))
+            {
+                return BadRequest("Invalid post id");
+            }
+
             var result = await postService.Like(postId.ToString());
             if (!result.Succedeed)
             {
                 return InternalServerError();
             }
-            return Ok();
+            return Ok(result.Message);
         }
 
         [Route("{id:Guid}/unlike")]
         [HttpPut]
         public async Task<IHttpActionResult> Unlike(Guid postId)
         {
+            if (postId.Equals(Guid.Empty))
+            {
+                return BadRequest("Invalid post id");
+            }
+
             var result = await postService.Unlike(postId.ToString());
             if (!result.Succedeed)
             {
                 return InternalServerError();
             }
-            return Ok();
+            return Ok(result.Message);
         }
     }
 }
