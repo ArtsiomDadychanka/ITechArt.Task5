@@ -19,9 +19,9 @@ namespace MiniSocialNetwork.Api.Controllers
     [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
-        public IUserService UserService { get; }
+        public IAuthService UserService { get; }
 
-        public AccountController(IUserService userService)
+        public AccountController(IAuthService userService)
         {
             UserService = userService;
         }

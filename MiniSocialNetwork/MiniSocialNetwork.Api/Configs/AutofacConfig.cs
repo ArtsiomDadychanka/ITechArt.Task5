@@ -38,7 +38,7 @@ namespace MiniSocialNetwork.Api.Configs
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(UserService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(AuthService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces();
             //.InstancePerRequest();

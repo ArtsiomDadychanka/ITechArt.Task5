@@ -12,5 +12,8 @@ namespace MiniSocialNetwork.Api.Models
         [MinLength(1, ErrorMessage = "Text of comment is empty.")]
         [DataType(DataType.Text)]
         public String Text { get; set; }
+
+        [Required(ErrorMessage = "Post id is required.")]
+        public String PostId { get; set; }
     }
 }

@@ -37,8 +37,8 @@ namespace MiniSocialNetwork.Api.Configs
                     opt => opt.MapFrom(f => $"{f.UserProfile.Firstname} {f.UserProfile.Lastname}"))
                 .ForMember("AuthorId", opt => opt.MapFrom(f => f.UserProfile.ApplicationUser.Id));
 
-            cfg.CreateMap<CommentDTO, Post>();
-            cfg.CreateMap<Post, CommentDTO>()
+            cfg.CreateMap<CommentDTO, Comment>();
+            cfg.CreateMap<Comment, CommentDTO>()
                 .ForMember("AuthorName",
                     opt => opt.MapFrom(f => $"{f.UserProfile.Firstname} {f.UserProfile.Lastname}"))
                 .ForMember("AuthorId", opt => opt.MapFrom(f => f.UserProfile.ApplicationUser.Id));

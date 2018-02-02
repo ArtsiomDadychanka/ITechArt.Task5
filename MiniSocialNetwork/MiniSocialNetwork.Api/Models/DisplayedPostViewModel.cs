@@ -4,6 +4,7 @@ namespace MiniSocialNetwork.Api.Models
 {
     public class DisplayedPostViewModel
     {
+        public String Id { get; set; }
         public String AuthorName { get; set; }
         public String Text { get; set; }
         public DateTime PostedDate { get; set; }

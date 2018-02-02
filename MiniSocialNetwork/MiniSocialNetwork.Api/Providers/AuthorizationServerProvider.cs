@@ -15,9 +15,9 @@ namespace MiniSocialNetwork.Api.Providers
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        private IUserService userService;
+        private IAuthService userService;
 
-        public AuthorizationServerProvider(IUserService userService)
+        public AuthorizationServerProvider(IAuthService userService)
         {
             this.userService = userService;
         }
