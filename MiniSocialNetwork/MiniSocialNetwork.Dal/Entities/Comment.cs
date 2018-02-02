@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniSocialNetwork.Dal.Entities
 {
     public class Comment
     {
         [Key]
-        public String Id { get; set; } = Guid.Empty.ToString();
-        public String Text { get; set; } = String.Empty;
-        public DateTime PostedTime { get; set; } = DateTime.Now;
+        public String Id { get; set; }
+        public String Text { get; set; }
+        public DateTime PostedTime { get; set; }
         [ForeignKey("Post")]
         public String PostId { get; set; }
         [ForeignKey("UserProfile")]
