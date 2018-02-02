@@ -95,7 +95,7 @@ namespace MiniSocialNetwork.Bll.Services
             
             if (user != null)
                 claim = await Uow.UserManager.CreateIdentityAsync(user,
-                    DefaultAuthenticationTypes.ApplicationCookie);
+                    DefaultAuthenticationTypes.ExternalBearer);
 
             return claim;
         }

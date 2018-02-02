@@ -16,8 +16,11 @@ export const PAGES_URL = {
   SETTINGS: `Settings`,
   ADMIN: `Admin`,
 };
-
+// session storage
 export const TOKEN_KEY = 'TOKEN_KEY';
+export const CURRENT_USERNAME = "CURRENT_USERNAME";
+
+
 export const ACCESS_TOKEN_KEY = 'access_token';
 
 export const defaultHeadersToApi = new Headers({

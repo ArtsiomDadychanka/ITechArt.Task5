@@ -4,6 +4,15 @@ import SubscribersSidebar from './panels/subscribersSidebar';
 import Wall from './wall';
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+
+
+  }
+
+  componentDidMount() {
+
+  }
 
   render() {
     return (

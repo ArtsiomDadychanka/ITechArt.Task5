@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
 import Profile from './components/profile';
+import ErrorPage from './components/errorPage';
 import * as global from './constants/global';
 import {
   HashRouter,
@@ -26,17 +27,27 @@ function renderProfile() {
   );
 }
 
+function renderError() {
+  return (
+    <ErrorPage />
+  );
+}
+
 function componentSubstitution() {
   const rootComponent = (
     <div> Something went wrong ... </div>
   );
   const url = window.location.href.replace(global.SERVER_ADDRESS, '');
-  console.log(url);
+
   switch (url) {
     case global.PAGES_URL.LOGIN: {
       return renderLogin();
     }
     case global.PAGES_URL.USER_PROFILE: {
+      const token = sessionStorage.getItem(global.TOKEN_KEY)
+      if (token === null) {
+        return renderError();
+      }
       return renderProfile();
     }
     default:
