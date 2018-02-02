@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
+using System.Transactions;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
@@ -20,9 +22,9 @@ using MiniSocialNetwork.Dal.Repositories;
 
 namespace MiniSocialNetwork.Bll.Services
 {
-    public class UserService : Service, IUserService
+    public class AuthService : Service, IAuthService
     {
-        public UserService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AuthService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
@@ -32,21 +34,31 @@ namespace MiniSocialNetwork.Bll.Services
             if (appUser == null)
             {
                 appUser = Mapper.Map<UserDTO, ApplicationUser>(user);
-                var result = await Uow.UserManager.CreateAsync(appUser, user.Password);
-                if (result.Errors.Any())
-                {
-                    return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
-                }
-                await Uow.UserManager.AddToRoleAsync(appUser.Id, user.Role);
-                
-                CreateUserProfile(appUser.Id, user);
 
-                await Uow.SaveAsync();
+                try
+                {
+                    var result = await Uow.UserManager.CreateAsync(appUser, user.Password);
+                    if (result.Errors.Any())
+                    {
+                        return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
+                    }
+                    await Uow.UserManager.AddToRoleAsync(appUser.Id, user.Role);
+
+                    CreateUserProfile(appUser.Id, user);
+
+                    await Uow.SaveAsync();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return new OperationDetails(false, "Validation failed.", "");
+                }
 
                 return new OperationDetails(true, "Registration successfully completed!", "");
             }
+
             return new OperationDetails(false, "A user with this login already exists!", "Email");
         }
+
         // TODO: temporary for role creating
         public async Task<OperationDetails> CreateRoleAsync()
         {
@@ -88,6 +100,7 @@ namespace MiniSocialNetwork.Bll.Services
             return claim;
         }
 
+        #region Helpers
         private void CreateUserProfile(string id, UserDTO user)
         {
             UserProfile userProfile = Mapper.Map<UserDTO, UserProfile>(user);
@@ -95,6 +108,7 @@ namespace MiniSocialNetwork.Bll.Services
 
             Uow.ProfileManager.Create(userProfile);
         }
+        #endregion
 
         #region Dispose
         public void Dispose()

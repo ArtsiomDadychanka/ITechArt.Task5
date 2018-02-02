@@ -12,7 +12,7 @@ using MiniSocialNetwork.Dal.Identity;
 
 namespace MiniSocialNetwork.Bll.Interfaces
 {
-    public interface IUserService : IDisposable
+    public interface IAuthService : IDisposable
     {
         // TODO: temporary for role creating
         Task<OperationDetails> CreateRoleAsync();
