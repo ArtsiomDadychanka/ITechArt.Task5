@@ -4,6 +4,7 @@ namespace MiniSocialNetwork.Bll.DTO
 {
     public class UserDTO
     {
+        public String Id { get; set; } = Guid.NewGuid().ToString();
         public String Firstname { get; set; } = String.Empty;
         public String Lastname { get; set; } = String.Empty;
         public String Email { get; set; } = String.Empty;
