@@ -13,6 +13,7 @@ namespace MiniSocialNetwork.Dal.Interfaces
         IUserProfileManager ProfileManager { get; }
         ApplicationRoleManager RoleManager { get; }
         IPostRepository PostRepository { get; }
+        ICommentRepository CommentRepository { get; }
         Task SaveAsync();
     }
 }

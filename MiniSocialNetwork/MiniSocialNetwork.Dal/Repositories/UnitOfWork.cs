@@ -21,12 +21,14 @@ namespace MiniSocialNetwork.Dal.Repositories
             RoleManager = new ApplicationRoleManager(new RoleStore<UserRole>(db));
             ProfileManager = new ProfileManagerRepository(db);
             PostRepository = new PostRepository(db);
+            CommentRepository = new CommentRepository(db);
         }
 
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
         public IUserProfileManager ProfileManager { get; }
         public IPostRepository PostRepository { get; }
+        public ICommentRepository CommentRepository { get; set; }
 
         public async Task SaveAsync()
         {
@@ -50,6 +52,8 @@ namespace MiniSocialNetwork.Dal.Repositories
                     UserManager.Dispose();
                     RoleManager.Dispose();
                     ProfileManager.Dispose();
+                    PostRepository.Dispose();
+                    CommentRepository.Dispose();
                 }
                 this.disposed = true;
             }

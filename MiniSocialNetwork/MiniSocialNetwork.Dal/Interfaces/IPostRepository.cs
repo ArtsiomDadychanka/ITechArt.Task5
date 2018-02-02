@@ -7,7 +7,7 @@ using MiniSocialNetwork.Dal.Entities;
 
 namespace MiniSocialNetwork.Dal.Interfaces
 {
-    public interface IPostRepository
+    public interface IPostRepository : IDisposable
     {
         void Create(Post post);
         void DeleteAsync(String id);

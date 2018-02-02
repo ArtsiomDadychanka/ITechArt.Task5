@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Entities;
 using MiniSocialNetwork.Dal.Exceptions;
@@ -11,13 +8,10 @@ using MiniSocialNetwork.Dal.Interfaces;
 
 namespace MiniSocialNetwork.Dal.Repositories
 {
-    public class PostRepository : IPostRepository
+    public class PostRepository : Repository, IPostRepository
     {
-        public ApplicationContext Database { get; set; }
-
-        public PostRepository(ApplicationContext db)
+        public PostRepository(ApplicationContext db) : base(db)
         {
-            Database = db;
         }
 
         public void Create(Post post)

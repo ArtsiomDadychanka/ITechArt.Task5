@@ -9,24 +9,18 @@ using MiniSocialNetwork.Dal.Interfaces;
 
 namespace MiniSocialNetwork.Dal.Repositories
 {
-    public class ProfileManagerRepository : IUserProfileManager
+    public class ProfileManagerRepository : Repository, IUserProfileManager
     {
-        public ApplicationContext Database { get; set; }
-
-        public ProfileManagerRepository(ApplicationContext db)
+        public ProfileManagerRepository(ApplicationContext dbContext) : base(dbContext)
         {
-            Database = db;
         }
+
+
 
         public void Create(UserProfile user)
         {
             Database.UserProfiles.Add(user);
             Database.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            Database.Dispose();
         }
     }
 }
