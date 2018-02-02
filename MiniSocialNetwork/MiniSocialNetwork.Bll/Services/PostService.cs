@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,15 +30,15 @@ namespace MiniSocialNetwork.Bll.Services
             return new OperationDetails(true, "Post created successfully.", "");
         }
 
-        public IEnumerable<PostDTO> GetPosts()
+        public async Task<IEnumerable<PostDTO>> GetPostsAsync()
         {
-            IEnumerable<Post> posts = Uow.PostRepository.GetAll().AsEnumerable();
+            IEnumerable<Post> posts = await Uow.PostRepository.GetAll().ToListAsync();
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(posts);
         }
 
-        public IEnumerable<PostDTO> GetUsersPosts(String id)
+        public async Task<IEnumerable<PostDTO>> GetUsersPostsAsync(String id)
         {
-            IEnumerable<Post> posts = Uow.PostRepository.GetUsersPosts(id).AsEnumerable();
+            IEnumerable<Post> posts = await Uow.PostRepository.GetUsersPosts(id).ToListAsync();
             return Mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(posts);
         }
 
