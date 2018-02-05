@@ -23,6 +23,6 @@ namespace MiniSocialNetwork.Dal.Entities
         public Byte[] Avatar { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

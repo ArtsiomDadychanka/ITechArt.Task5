@@ -16,6 +16,6 @@ namespace MiniSocialNetwork.Dal.Entities
         public String AuthorId { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
