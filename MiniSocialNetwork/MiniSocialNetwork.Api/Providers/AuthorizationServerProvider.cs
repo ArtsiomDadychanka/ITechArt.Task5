@@ -7,6 +7,7 @@ using System.Web;
 using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using AutoMapper;
+using Microsoft.Owin.Security;
 using MiniSocialNetwork.Api.Models;
 using MiniSocialNetwork.Bll.DTO;
 using MiniSocialNetwork.Bll.Interfaces;
@@ -42,11 +43,33 @@ namespace MiniSocialNetwork.Api.Providers
                 return;
             }
 
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
+            String userId = result.Claims.First(c => c.Type == "id").Value;
 
-            context.Validated(identity);
+            AuthenticationTicket ticket = new AuthenticationTicket(
+                result, 
+                CreateProperties(userId));
+            context.Validated(ticket);
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            foreach (KeyValuePair<string,
+                string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
+
+            return Task.FromResult<object>(null);
+        }
+
+        private AuthenticationProperties CreateProperties(String id)
+        {
+            IDictionary<string, string>
+                data = new Dictionary<string, string>
+                {
+                    { "id", id }
+                };
+            return new AuthenticationProperties(data);
         }
     }
 }
