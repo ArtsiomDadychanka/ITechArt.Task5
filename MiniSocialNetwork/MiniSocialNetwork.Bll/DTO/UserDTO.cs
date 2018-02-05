@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MiniSocialNetwork.Bll.DTO
 {
     public class UserDTO
     {
+        public UserDTO()
+        {
+        }
+
         public String Id { get; set; } = Guid.NewGuid().ToString();
         public String Firstname { get; set; } = String.Empty;
         public String Lastname { get; set; } = String.Empty;
@@ -19,5 +24,7 @@ namespace MiniSocialNetwork.Bll.DTO
         public String FavoriteMusic { get; set; } = String.Empty;
         public Byte[] Avatar { get; set; } = null;
         public String Role { get; set; } = Shared.Constants.RolesNames.User;
+
+        public IEnumerable<PostDTO> Posts { get; set; }
     }
 }
