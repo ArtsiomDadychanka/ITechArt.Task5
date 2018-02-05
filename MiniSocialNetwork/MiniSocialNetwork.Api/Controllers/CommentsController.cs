@@ -15,7 +15,7 @@ namespace MiniSocialNetwork.Api.Controllers
     [RoutePrefix("api/comments")]
     public class CommentsController : ApiController
     {
-        private ICommentService commentService;
+        private readonly ICommentService commentService;
 
         public CommentsController(ICommentService commentService)
         {

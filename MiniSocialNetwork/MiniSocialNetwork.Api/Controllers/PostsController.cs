@@ -13,7 +13,7 @@ namespace MiniSocialNetwork.Api.Controllers
     //[Authorize]
     public class PostsController : ApiController
     {
-        private IPostService postService;
+        private readonly IPostService postService;
 
         public PostsController(IPostService postService)
         {
