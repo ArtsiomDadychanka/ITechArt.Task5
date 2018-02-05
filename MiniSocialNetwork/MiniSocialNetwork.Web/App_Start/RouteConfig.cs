@@ -19,6 +19,12 @@ namespace MiniSocialNetwork.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Profile", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
