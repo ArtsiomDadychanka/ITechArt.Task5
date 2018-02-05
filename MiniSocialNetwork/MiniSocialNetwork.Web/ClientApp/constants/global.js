@@ -5,12 +5,15 @@ export const SERVER_API_URI = {
   SIGNIN: `/account/signin`,
   SIGNUP: `/account/signup`,
   POSTS: `/posts`,
-  POSTS_LIKE: `/posts/id/like`,
-  POSTS_UNLIKE: `/posts/id/unlike`,
+  POSTS_LIKE: `/posts/{id}/like`,
+  POSTS_UNLIKE: `/posts/{id}/unlike`,
+  USER_INFO: `/users/{id}`
 };
+export const URI_REGEXP_PATTERN = /{.*}/gi;
+
 export const PAGES_URL = {
   LOGIN: `Login`,
-  USER_PROFILE: `Profile`,
+  USER_PROFILE: `Profile/Index`,
   MESSAGES: `Messages`,
   SUBSCRIBERS: `Subscribers`,
   SETTINGS: `Settings`,
@@ -18,8 +21,7 @@ export const PAGES_URL = {
 };
 // session storage
 export const TOKEN_KEY = 'TOKEN_KEY';
-export const CURRENT_USERNAME = "CURRENT_USERNAME";
-
+export const CURRENT_USER_ID = "CURRENT_USER_ID";
 
 export const ACCESS_TOKEN_KEY = 'access_token';
 

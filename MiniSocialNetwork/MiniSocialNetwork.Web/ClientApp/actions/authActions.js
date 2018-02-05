@@ -44,11 +44,11 @@ export function signIn(userCredentials) {
       .then(json => {
         const token = json[global.ACCESS_TOKEN_KEY];
         sessionStorage.setItem(global.TOKEN_KEY, token);
-        sessionStorage.setItem(global.CURRENT_USERNAME, userCredentials.username);
+        sessionStorage.setItem(global.CURRENT_USER_ID, json['id']);
         dispath({
           type: types.SIGN_IN_SUCCESS,
           data: json, // TODO: must be only username!
-          redirectUrl: `${global.SERVER_ADDRESS}${global.PAGES_URL.USER_PROFILE}`
+          redirectUrl: `${global.SERVER_ADDRESS}${global.PAGES_URL.USER_PROFILE}/${json['id']}`
         });
         alert("");
       })

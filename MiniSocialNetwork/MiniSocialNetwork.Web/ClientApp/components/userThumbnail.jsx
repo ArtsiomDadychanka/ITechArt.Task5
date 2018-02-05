@@ -5,7 +5,7 @@ const UserThumbnail = ({ username = "username", col = "s2" }) => {
     <a href="#" className={`user-thumbnail col ${col}`}>
       <img
         className="user-thumbnail__img"
-        src="../../content/images/fake-profile.jpg"
+        src="../../content/images/noavatar.jpg"
         alt={username}
       />
     </a>

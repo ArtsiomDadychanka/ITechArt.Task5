@@ -4,13 +4,16 @@ import Header from './components/header';
 import Footer from './components/footer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
-import Profile from './components/profile';
+import Profile from './containers/profileContainer';
 import ErrorPage from './components/errorPage';
 import * as global from './constants/global';
 import {
   HashRouter,
 } from 'react-router-dom';
 
+function isCurrentUser(id) {
+  return sessionStorage.getItem(global.CURRENT_USER_ID) === id;
+}
 function renderLogin() {
   return (
     <HashRouter>
@@ -21,16 +24,14 @@ function renderLogin() {
     </HashRouter>
   );
 }
-function renderProfile() {
-  return (
-    <Profile />
-  );
+function renderProfile(userId) {
+  if (isCurrentUser(userId)) {
+    return (<Profile />);
+  }
+  return (<Profile userId={userId} />);
 }
-
 function renderError() {
-  return (
-    <ErrorPage />
-  );
+  return (<ErrorPage />);
 }
 
 function componentSubstitution() {
@@ -38,6 +39,15 @@ function componentSubstitution() {
     <div> Something went wrong ... </div>
   );
   const url = window.location.href.replace(global.SERVER_ADDRESS, '');
+  const location = window.location.href;
+  const idRegExp = /Profile\/Index\//gi;
+
+  if (idRegExp.exec(location) !== null) {
+    console.log('URL');
+    console.log(location);
+    console.log(idRegExp);
+    return renderProfile(location.substring(idRegExp.lastIndex))
+  }
 
   switch (url) {
     case global.PAGES_URL.LOGIN: {
@@ -57,12 +67,15 @@ function componentSubstitution() {
 
 const App = () => {
   const rootComponent = componentSubstitution();
+  const onLogoffClick = () => {
+    sessionStorage.clear();
+    window.location.href = global.SERVER_ADDRESS;
+  }
 
   return (
     <div className="app-container">
-      <Header />
+      <Header onLogoffClick={onLogoffClick} />
       {rootComponent}
-
       <Footer />
     </div>
   );
