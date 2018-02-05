@@ -90,6 +90,7 @@
     <Compile Include="Interfaces\IUserProfileManager.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Exceptions\PostNotFoundException.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Migrations\201801301659108_AddUserPostsMigration.cs" />
     <Compile Include="Migrations\201801301659108_AddUserPostsMigration.Designer.cs">
       <DependentUpon>201801301659108_AddUserPostsMigration.cs</DependentUpon>
@@ -121,6 +122,7 @@
     <Compile Include="Repositories\ProfileManagerRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

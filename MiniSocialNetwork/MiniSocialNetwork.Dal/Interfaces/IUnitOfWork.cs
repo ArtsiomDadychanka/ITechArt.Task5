@@ -14,6 +14,7 @@ namespace MiniSocialNetwork.Dal.Interfaces
         ApplicationRoleManager RoleManager { get; }
         IPostRepository PostRepository { get; }
         ICommentRepository CommentRepository { get; }
+        IUserRepository UserRepository { get; }
         Task SaveAsync();
     }
 }

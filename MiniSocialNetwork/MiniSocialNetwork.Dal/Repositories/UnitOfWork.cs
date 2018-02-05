@@ -22,6 +22,7 @@ namespace MiniSocialNetwork.Dal.Repositories
             ProfileManager = new ProfileManagerRepository(db);
             PostRepository = new PostRepository(db);
             CommentRepository = new CommentRepository(db);
+            UserRepository = new UserRepository(db);
         }
 
         public ApplicationUserManager UserManager { get; }
@@ -29,6 +30,7 @@ namespace MiniSocialNetwork.Dal.Repositories
         public IUserProfileManager ProfileManager { get; }
         public IPostRepository PostRepository { get; }
         public ICommentRepository CommentRepository { get; set; }
+        public IUserRepository UserRepository { get; }
 
         public async Task SaveAsync()
         {
