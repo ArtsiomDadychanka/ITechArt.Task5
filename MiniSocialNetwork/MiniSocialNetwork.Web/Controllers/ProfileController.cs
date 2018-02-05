@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace MiniSocialNetwork.Web.Controllers
 {
+    [RoutePrefix("Profile")]
     public class ProfileController : Controller
     {
-        // GET: Profile
-        public ActionResult Index()
+        [Route("{id:Guid}")]
+        public ActionResult Index(Guid id)
         {
             return View("Profile");
         }
