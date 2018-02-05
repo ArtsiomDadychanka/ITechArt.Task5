@@ -92,11 +92,14 @@ namespace MiniSocialNetwork.Bll.Services
             ClaimsIdentity claim = null;
             
             ApplicationUser user = await Uow.UserManager.FindAsync(userDto.Email, userDto.Password);
-            
+
             if (user != null)
+            {
                 claim = await Uow.UserManager.CreateIdentityAsync(user,
                     DefaultAuthenticationTypes.ExternalBearer);
-
+                claim.AddClaim(new Claim("id", user.Id));
+            }
+            
             return claim;
         }
 
