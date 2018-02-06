@@ -25,6 +25,7 @@ export function signIn(userCredentials) {
       "Accept": "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     });
+
     fetch(`${global.SERVER_TOKEN_ADDRESS}`, {
         mode: 'cors',
         method: 'post',
@@ -33,11 +34,7 @@ export function signIn(userCredentials) {
       })
       .then(res => {
         if (res.status !== 200) {
-          dispath({
-            type: types.SIGN_IN_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
         return res.json();
       })
@@ -50,9 +47,16 @@ export function signIn(userCredentials) {
           data: json, // TODO: must be only username!
           redirectUrl: `${global.SERVER_ADDRESS}${global.PAGES_URL.USER_PROFILE}/${json['id']}`
         });
-        alert("");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispath({
+          type: types.SIGN_IN_REJECT,
+          data: null,
+          error: err,
+        });
+        console.log(err);
+        console.error(err);
+      });
 
   };
 }

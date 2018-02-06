@@ -7,7 +7,8 @@ export const SERVER_API_URI = {
   POSTS: `/posts`,
   POSTS_LIKE: `/posts/{id}/like`,
   POSTS_UNLIKE: `/posts/{id}/unlike`,
-  USER_INFO: `/users/{id}`
+  USER_INFO: `/users/{id}`,
+  COMMENTS: `/comments`
 };
 export const URI_REGEXP_PATTERN = /{.*}/gi;
 
@@ -31,7 +32,8 @@ export const defaultHeadersToApi = new Headers({
 });
 
 const token = `Bearer ${sessionStorage.getItem(ACCESS_TOKEN_KEY)}`;
-export const authorizeHeaders = defaultHeadersToApi.append(
-  "Authorization",
-  token
-);
+export const authorizeHeaders = new Headers({
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'Authorization': token
+});

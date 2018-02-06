@@ -1,13 +1,17 @@
 import React from 'react';
 import Comment from './comment';
+import NewComment from './newComment';
 
 class Comments extends React.Component {
 
   render() {
     const { comments } = this.props;
-    const postComments = comments.map((comment) => {
-      return (<Comment key={comment.id} comment={comment} />);
-    });
+
+    const postComments = comments ?
+      comments.map((comment) => {
+        return (<Comment key={comment.id} comment={comment} />);
+      }) :
+      [];
 
     return (
       <ul className="collapsible comments">
@@ -20,6 +24,7 @@ class Comments extends React.Component {
               </div>
           <div className="collapsible-body">
             {postComments}
+            <NewComment />
           </div>
         </li>
       </ul>

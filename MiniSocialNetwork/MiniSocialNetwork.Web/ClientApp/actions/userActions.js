@@ -23,11 +23,7 @@ export function loadUserInfo(userId) {
       })
       .then(res => {
         if (res.status !== 200) {
-          dispatch({
-            type: types.GET_USER_INFO_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
         return res.json();
       })
@@ -37,6 +33,12 @@ export function loadUserInfo(userId) {
           data: userInfo
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.GET_USER_INFO_REJECT,
+          data: null,
+          error: err,
+        });
+      });
   };
 }

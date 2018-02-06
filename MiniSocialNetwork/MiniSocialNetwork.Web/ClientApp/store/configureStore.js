@@ -14,13 +14,13 @@ import rootReducer from '../reducers/rootReducer';
 
 export default function configureStore(initState) {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const logger = createLogger();
+  // const logger = createLogger();
 
   const store = createStore(
     rootReducer,
     initState,
     composeWithDevTools(
-      applyMiddleware(logger, thunk)
+      applyMiddleware(thunk)
     ));
   return store;
 }

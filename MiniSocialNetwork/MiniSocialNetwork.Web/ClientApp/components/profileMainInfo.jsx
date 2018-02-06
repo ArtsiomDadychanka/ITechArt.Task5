@@ -3,12 +3,15 @@ import ProfilePhoto from './profilePhoto';
 import ProfileActions from './profileActions';
 import ProfileMyActions from './profileMyActions';
 
-const ProfileMainInfo = () => {
+const ProfileMainInfo = ({ username, isSelf }) => {
+  const actions = isSelf ?
+    (<ProfileMyActions username={username} />) :
+    (<ProfileActions username={username} />);
+
   return (
     <div className="profile-main-info">
       <ProfilePhoto />
-      <ProfileActions />
-      {/* <ProfileMyActions /> */}
+      {actions}
     </div>
   );
 }

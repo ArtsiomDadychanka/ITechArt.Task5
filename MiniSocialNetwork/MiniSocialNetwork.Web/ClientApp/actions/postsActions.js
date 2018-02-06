@@ -8,18 +8,14 @@ export function getPosts(userId) {
       data: null
     });
 
-    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.POSTS}/${userId}}`, {
+    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.POSTS}/${userId}`, {
         mode: 'cors',
         method: 'get',
         headers: global.authorizeHeaders,
       })
       .then(res => {
         if (res.status !== 200) {
-          dispatch({
-            type: types.GET_USER_POSTS_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
         return res.json();
       })
@@ -29,7 +25,14 @@ export function getPosts(userId) {
           data: posts
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.GET_USER_POSTS_REJECT,
+          data: null,
+          error: err,
+        });
+        console.log(err);
+      });
   };
 }
 
@@ -48,13 +51,8 @@ export function createPost(post) {
       })
       .then(res => {
         if (res.status !== 201) {
-          dispatch({
-            type: types.CREATE_POST_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
-
         return res.json();
       })
       .then(createdPost => {
@@ -63,7 +61,14 @@ export function createPost(post) {
           data: createdPost
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.CREATE_POST_REJECT,
+          data: null,
+          error: err,
+        });
+        console.log(err);
+      });
   };
 }
 
@@ -81,20 +86,20 @@ export function removePost(postId) {
       })
       .then(res => {
         if (res.status !== 200) {
-          dispatch({
-            type: types.DELETE_POSTS_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
-        if (res.status === 200) {
-          dispatch({
-            type: types.DELETE_POSTS_SUCCESS,
-            data: null
-          });
-        }
+        dispatch({
+          type: types.DELETE_POSTS_SUCCESS,
+          data: null
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.DELETE_POSTS_REJECT,
+          data: null,
+          error: err,
+        });
+      });
   };
 }
 
@@ -118,11 +123,7 @@ export function likePost(postId) {
       })
       .then(res => {
         if (res.status !== 200) {
-          dispatch({
-            type: types.LIKE_POSTS_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
         if (res.status === 200) {
           dispatch({
@@ -131,7 +132,14 @@ export function likePost(postId) {
           });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.LIKE_POSTS_REJECT,
+          data: null,
+          error: err,
+        });
+        console.log(err);
+      });
   };
 }
 
@@ -155,11 +163,7 @@ export function unlikePost(postId) {
       })
       .then(res => {
         if (res.status !== 200) {
-          dispatch({
-            type: types.UNLIKE_POSTS_REJECT,
-            data: null,
-            error: res.statusText,
-          });
+          throw new Error(res.statusText);
         }
         if (res.status === 200) {
           dispatch({
@@ -168,6 +172,12 @@ export function unlikePost(postId) {
           });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch({
+          type: types.UNLIKE_POSTS_REJECT,
+          data: null,
+          error: err,
+        });
+      });
   };
 }

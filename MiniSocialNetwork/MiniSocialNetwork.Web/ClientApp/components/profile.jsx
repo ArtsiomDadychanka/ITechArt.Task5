@@ -1,24 +1,26 @@
 import React from 'react';
 import ProfileSidebar from './panels/profileSidebar';
 import SubscribersSidebar from './panels/subscribersSidebar';
-import Wall from './wall';
+import Wall from '../containers/wallContainer';
 import * as  global from '../constants/global';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-
-
   }
 
   componentDidMount() {
     const { loadUserInfo } = this.props.userActions;
+    const { getPosts } = this.props.postsActions;
+
     const { userId } = this.props;
     if (userId) {
       loadUserInfo(userId);
+      getPosts(userId);
     } else {
       const currentUserId = sessionStorage.getItem(global.CURRENT_USER_ID);
       loadUserInfo(currentUserId);
+      getPosts(currentUserId);
     }
   }
 
@@ -33,11 +35,19 @@ class Profile extends React.Component {
         </div>
       )
     }
-    const { posts } = user;
+    const { posts } = this.props;
+    const { username } = user;
+
+    const { userId } = this.props;
+    let isSelf = false;
+
+    if (!userId) {
+      isSelf = !isSelf;
+    }
 
     return (
       <div className="profile row">
-        <ProfileSidebar user={user} />
+        <ProfileSidebar isSelf={isSelf} username={username} />
         <Wall posts={posts} />
         <SubscribersSidebar />
       </div>

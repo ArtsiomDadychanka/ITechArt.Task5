@@ -1,18 +1,32 @@
 import React from 'react';
 import Post from './post';
 
-const Posts = ({ posts = [] }) => {
-  const userPosts = posts.map((post) => {
-    return (
-      <Post key={post.id} post={post} />
-    )
-  });
+class Posts extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="posts">
-      {userPosts}
-    </div>
-  );
+  }
+
+  componentDidMount() {
+    console.log('porps');
+    console.log(this.props);
+  }
+
+  render() {
+    const { posts = [], comments = [] } = this.props;
+
+    const userPosts = posts.map((post) => {
+      return (
+        <Post key={post.post.id} post={post} />
+      )
+    });
+
+    return (
+      <div className="posts">
+        {userPosts}
+      </div>
+    );
+  }
 }
 
 export default Posts;

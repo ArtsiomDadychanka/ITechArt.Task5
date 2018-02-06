@@ -2,10 +2,12 @@ import React from 'react';
 import UserThumbnail from './userThumbnail';
 import LikeButton from './buttons/likeButton';
 import CommentButton from './buttons/commentButton';
-import Comments from './comments';
+import Comments from '../components/comments';
 
 class Post extends React.Component {
   componentDidMount() {
+
+
     $(document).ready(function () {
       $('.collapsible').collapsible();
     });
@@ -13,7 +15,8 @@ class Post extends React.Component {
 
   render() {
     const { post } = this.props;
-    const { authorName, text, postedDate, likeCounts, comments } = post;
+    const { authorName, text, postedDate, likeCounts, id } = post.post;
+    const { comments } = post;
 
     return (
       <div className="post row">
