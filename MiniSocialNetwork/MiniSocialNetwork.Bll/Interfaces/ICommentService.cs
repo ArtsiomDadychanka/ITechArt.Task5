@@ -8,7 +8,7 @@ namespace MiniSocialNetwork.Bll.Interfaces
 {
     public interface ICommentService
     {
-        Task<OperationDetails> CreateCommentAsync(CommentDTO comment);
+        Task<OperationDetails<CommentDTO>> CreateCommentAsync(CommentDTO comment);
         Task<OperationDetails> RemoveCommentAsync(String commentId);
         Task<IEnumerable<CommentDTO>> GetPostCommentsAsync(String postId);
     }

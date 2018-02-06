@@ -14,8 +14,17 @@ namespace MiniSocialNetwork.Bll.Infrastructure
             Message = message;
             Property = prop;
         }
-        public bool Succedeed { get; private set; }
-        public string Message { get; private set; }
-        public string Property { get; private set; }
+        public bool Succedeed { get; }
+        public string Message { get; }
+        public string Property { get; }
+    }
+
+    public class OperationDetails<T> : OperationDetails  where T : class
+    {
+        public OperationDetails(bool succedeed, string message, string prop, T data) : base(succedeed, message, prop)
+        {
+            Data = data;
+        }
+        public T Data { get; }
     }
 }

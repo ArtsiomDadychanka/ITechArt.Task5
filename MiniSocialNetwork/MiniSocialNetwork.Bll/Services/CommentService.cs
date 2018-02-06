@@ -20,12 +20,16 @@ namespace MiniSocialNetwork.Bll.Services
         {
         }
 
-        public async Task<OperationDetails> CreateCommentAsync(CommentDTO comment)
+        public async Task<OperationDetails<CommentDTO>> CreateCommentAsync(CommentDTO comment)
         {
-            Uow.CommentRepository.Create(Mapper.Map<CommentDTO, Comment>(comment));;
+            Comment createdComment = Uow.CommentRepository.Create(Mapper.Map<CommentDTO, Comment>(comment));
             await Uow.SaveAsync();
 
-            return new OperationDetails(true, "Comment created successfully.", "");
+            return new OperationDetails<CommentDTO>(
+                true,
+                "Comment created successfully.",
+                "",
+                Mapper.Map<Comment, CommentDTO>(createdComment));
         }
 
         public async Task<OperationDetails> RemoveCommentAsync(String commentId)

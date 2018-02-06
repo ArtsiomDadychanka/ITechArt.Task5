@@ -10,7 +10,7 @@ namespace MiniSocialNetwork.Bll.Interfaces
 {
     public interface IPostService
     {
-        Task<OperationDetails> CreatePostAsync(PostDTO post);
+        Task<OperationDetails<PostDTO>> CreatePostAsync(PostDTO post);
         Task<OperationDetails> RemovePostAsync(String id);
         Task<IEnumerable<PostDTO>> GetPostsAsync();
         Task<IEnumerable<PostDTO>> GetUsersPostsAsync(String id);

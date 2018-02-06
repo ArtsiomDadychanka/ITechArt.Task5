@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MiniSocialNetwork.Bll.DTO;
@@ -21,13 +19,21 @@ namespace MiniSocialNetwork.Bll.Services
 
         }
 
-        public async Task<OperationDetails> CreatePostAsync(PostDTO post)
+        public async Task<OperationDetails<PostDTO>> CreatePostAsync(PostDTO post)
         {
-            Uow.PostRepository.Create(Mapper.Map<PostDTO, Post>(post));
+            Post createdPost = Uow.PostRepository.Create(Mapper.Map<PostDTO, Post>(post));
+            UserProfile postAuthor = await Uow.ProfileManager.GetUserByIdAsync(createdPost.AuthorId);
+
+            PostDTO createdPostDTO = Mapper.Map<Post, PostDTO>(createdPost);
+            createdPostDTO.AuthorName = GetAuthorName(postAuthor);
 
             await Uow.SaveAsync();
 
-            return new OperationDetails(true, "Post created successfully.", "");
+            return new OperationDetails<PostDTO>(
+                true,
+                "Post created successfully.",
+                "",
+                createdPostDTO);
         }
 
         public async Task<IEnumerable<PostDTO>> GetPostsAsync()
@@ -73,6 +79,11 @@ namespace MiniSocialNetwork.Bll.Services
             await Uow.SaveAsync();
 
             return new OperationDetails(true, "Post unliked successfully.", "");
+        }
+
+        private String GetAuthorName(UserProfile user)
+        {
+            return $"{user.Firstname} {user.Lastname}";
         }
     }
 }
