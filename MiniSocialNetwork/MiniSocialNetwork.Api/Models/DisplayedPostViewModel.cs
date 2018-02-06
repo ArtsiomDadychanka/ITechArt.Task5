@@ -15,6 +15,6 @@ namespace MiniSocialNetwork.Api.Models
         public DateTime PostedDate { get; set; }
         public Int32 LikeCounts { get; set; }
 
-        public IEnumerable<DisplayedCommentViewModel> Comments { get; set; }
+        //public IEnumerable<DisplayedCommentViewModel> Comments { get; set; }
     }
 }

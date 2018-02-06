@@ -163,6 +163,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\CreatedPostViewModel.cs" />
     <Compile Include="Models\DisplayedPostViewModel.cs" />
+    <Compile Include="Models\PostCommentsViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Providers\AuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />

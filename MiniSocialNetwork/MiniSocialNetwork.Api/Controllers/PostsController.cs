@@ -5,6 +5,7 @@ using System.Web.Http;
 using AutoMapper;
 using MiniSocialNetwork.Api.Models;
 using MiniSocialNetwork.Bll.DTO;
+using MiniSocialNetwork.Bll.Infrastructure;
 using MiniSocialNetwork.Bll.Interfaces;
 
 namespace MiniSocialNetwork.Api.Controllers
@@ -28,14 +29,15 @@ namespace MiniSocialNetwork.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await postService.CreatePostAsync(Mapper.Map<CreatedPostViewModel, PostDTO>(post));
+            OperationDetails<PostDTO> result = await postService.CreatePostAsync(Mapper.Map<CreatedPostViewModel, PostDTO>(post));
+            DisplayedPostViewModel createdPost = Mapper.Map<PostDTO, DisplayedPostViewModel>(result.Data);
 
             if (!result.Succedeed)
             {
                 return BadRequest(result.Message);
             }
 
-            return Created("", post);
+            return Created("", createdPost);
         }
 
         [Route("")]
@@ -70,10 +72,17 @@ namespace MiniSocialNetwork.Api.Controllers
             }
 
             var posts = await postService.GetUsersPostsAsync(id.ToString());
-            IEnumerable<DisplayedPostViewModel> displayedPosts =
-                Mapper.Map<IEnumerable<PostDTO>, IEnumerable<DisplayedPostViewModel>>(posts);
+            List<PostCommentsViewModel> postComments = new List<PostCommentsViewModel>();
+            foreach (PostDTO postDto in posts)
+            {
+                    postComments.Add(new PostCommentsViewModel()
+                    {
+                        Post = Mapper.Map<PostDTO, DisplayedPostViewModel>(postDto),
+                        Comments = Mapper.Map<IEnumerable<CommentDTO>, IEnumerable<DisplayedCommentViewModel>>(postDto.Comments)
+                    });
+            }
 
-            return Ok(displayedPosts);
+            return Ok(postComments);
         }
 
         [Route("{id:Guid}/like")]

@@ -8,5 +8,6 @@ namespace MiniSocialNetwork.Api.Models
         public String AuthorName { get; set; }
         public String Text { get; set; }
         public DateTime PostedDate { get; set; }
+        public String  PostId { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Web.Http;
 using AutoMapper;
 using MiniSocialNetwork.Api.Models;
 using MiniSocialNetwork.Bll.DTO;
+using MiniSocialNetwork.Bll.Infrastructure;
 using MiniSocialNetwork.Bll.Interfaces;
 
 namespace MiniSocialNetwork.Api.Controllers
@@ -45,14 +46,15 @@ namespace MiniSocialNetwork.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await commentService.CreateCommentAsync(Mapper.Map<CreatedCommentViewModel, CommentDTO>(commentViewModel));
+            OperationDetails<CommentDTO> result = await commentService.CreateCommentAsync(Mapper.Map<CreatedCommentViewModel, CommentDTO>(commentViewModel));
+            DisplayedCommentViewModel createdComment = Mapper.Map<CommentDTO, DisplayedCommentViewModel>(result.Data);
 
             if (!result.Succedeed)
             {
                 return BadRequest(result.Message);
             }
 
-            return Created("", commentViewModel);
+            return Created("", createdComment);
         }
 
         [Route("{id:Guid}")]
