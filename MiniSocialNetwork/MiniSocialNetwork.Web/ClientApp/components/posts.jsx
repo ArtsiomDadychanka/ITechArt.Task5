@@ -13,11 +13,11 @@ class Posts extends React.Component {
   }
 
   render() {
-    const { posts = [], comments = [] } = this.props;
+    const { posts = [], comments = [], onRemoveBtnClick } = this.props;
 
     const userPosts = posts.map((post) => {
       return (
-        <Post key={post.post.id} post={post} />
+        <Post onRemoveBtnClick={onRemoveBtnClick} key={post.post.id} post={post} />
       )
     });
 

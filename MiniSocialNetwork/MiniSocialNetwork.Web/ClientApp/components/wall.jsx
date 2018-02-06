@@ -14,6 +14,13 @@ class Wall extends React.Component {
     createPost(post);
   }
 
+  onRemoveBtnClick = (postId) => {
+    const { postsActions } = this.props;
+    const { removePost } = postsActions;
+
+    removePost(postId);
+  }
+
   render() {
     const { posts } = this.props;
     const { currentUserId } = this.props;
@@ -24,7 +31,7 @@ class Wall extends React.Component {
           currentUserId={currentUserId}
           onAddPostBtnClick={this.onAddPostBtnClick}
         />
-        <Posts posts={posts} />
+        <Posts onRemoveBtnClick={onRemoveBtnClick} posts={posts} />
       </div>
     );
   }

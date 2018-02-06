@@ -14,7 +14,7 @@ class Post extends React.Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, onRemoveBtnClick } = this.props;
     const { authorName, text, postedDate, likeCounts, id } = post.post;
     const { comments } = post;
 
@@ -22,7 +22,7 @@ class Post extends React.Component {
       <div className="post row">
         <div className="row">
           <UserThumbnail col={"s1"} />
-          <div className="post__content col s7">
+          <div className="post__content col s6">
             <div className="post__author green-text">
               {authorName}
             </div>
@@ -33,7 +33,7 @@ class Post extends React.Component {
               {text}
             </article>
           </div>
-          <div className="post__buttons row col s4">
+          <div className="post__buttons row col s3">
             <div className="post__like">
               <LikeButton />
               <span className="post__counter">
@@ -42,6 +42,11 @@ class Post extends React.Component {
             </div>
             <div className="post__comment">
             </div>
+          </div>
+          <div className="col s1">
+            <a onClick={() => { onRemoveBtnClick(id) }}>
+              <i className="material-icons">clear</i>
+            </a>
           </div>
         </div>
         <div className="post__comments row">
