@@ -10,5 +10,6 @@ namespace MiniSocialNetwork.Dal.Interfaces
     public interface IUserProfileManager : IDisposable
     {
         void Create(UserProfile user);
+        Task<UserProfile> GetUserByIdAsync(String id);
     }
 }

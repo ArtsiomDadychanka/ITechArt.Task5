@@ -14,9 +14,9 @@ namespace MiniSocialNetwork.Dal.Repositories
         {
         }
 
-        public void Create(Post post)
+        public Post Create(Post post)
         {
-            Database.UserPosts.Add(post);
+            return Database.UserPosts.Add(post);
         }
 
         public async void DeleteAsync(String id)

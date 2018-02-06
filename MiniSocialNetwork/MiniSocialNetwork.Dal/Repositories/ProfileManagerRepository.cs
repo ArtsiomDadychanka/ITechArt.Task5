@@ -22,5 +22,10 @@ namespace MiniSocialNetwork.Dal.Repositories
             Database.UserProfiles.Add(user);
             Database.SaveChanges();
         }
+
+        public async Task<UserProfile> GetUserByIdAsync(String id)
+        {
+            return await Database.UserProfiles.FindAsync(id);
+        }
     }
 }

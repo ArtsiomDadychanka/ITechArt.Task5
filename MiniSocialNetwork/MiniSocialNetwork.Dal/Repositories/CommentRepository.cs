@@ -17,9 +17,9 @@ namespace MiniSocialNetwork.Dal.Repositories
         {
         }
 
-        public void Create(Comment post)
+        public Comment Create(Comment post)
         {
-            Database.Comments.Add(post);
+            return Database.Comments.Add(post);
         }
 
         public async void DeleteAsync(String id)

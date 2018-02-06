@@ -9,7 +9,7 @@ namespace MiniSocialNetwork.Dal.Interfaces
 {
     public interface ICommentRepository : IDisposable
     {
-        void Create(Comment post);
+        Comment Create(Comment post);
         void DeleteAsync(String id);
         IQueryable<Comment> GetPostComments(String postId);
     }
