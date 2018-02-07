@@ -52,7 +52,7 @@ namespace MiniSocialNetwork.Bll.Services
         {
             try
             {
-                Uow.PostRepository.DeleteAsync(id);
+                await Uow.PostRepository.DeleteAsync(id);
             }
             catch (PostNotFoundException e)
             {
@@ -66,7 +66,7 @@ namespace MiniSocialNetwork.Bll.Services
 
         public async Task<OperationDetails> Like(String postId)
         {
-            Uow.PostRepository.Like(postId);
+            await Uow.PostRepository.Like(postId);
 
             await Uow.SaveAsync();
 
@@ -75,7 +75,7 @@ namespace MiniSocialNetwork.Bll.Services
 
         public async Task<OperationDetails> Unlike(String postId)
         {
-            Uow.PostRepository.Unlike(postId);
+            await Uow.PostRepository.Unlike(postId);
             await Uow.SaveAsync();
 
             return new OperationDetails(true, "Post unliked successfully.", "");
