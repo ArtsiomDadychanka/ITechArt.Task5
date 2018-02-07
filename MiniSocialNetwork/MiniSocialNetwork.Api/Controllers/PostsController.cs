@@ -32,15 +32,21 @@ namespace MiniSocialNetwork.Api.Controllers
             OperationDetails<PostDTO> result = await postService.CreatePostAsync(Mapper.Map<CreatedPostViewModel, PostDTO>(post));
             DisplayedPostViewModel createdPost = Mapper.Map<PostDTO, DisplayedPostViewModel>(result.Data);
 
+            PostCommentsViewModel createdPostComments = new PostCommentsViewModel()
+            {
+                Post = createdPost,
+                Comments = new List<DisplayedCommentViewModel>()
+            };
+
             if (!result.Succedeed)
             {
                 return BadRequest(result.Message);
             }
 
-            return Created("", createdPost);
+            return Created("", createdPostComments);
         }
 
-        [Route("")]
+        [Route("{id:Guid}")]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
             if (id.Equals(Guid.Empty))
@@ -85,7 +91,7 @@ namespace MiniSocialNetwork.Api.Controllers
             return Ok(postComments);
         }
 
-        [Route("{id:Guid}/like")]
+        [Route("{postId:Guid}/like")]
         [HttpPut]
         public async Task<IHttpActionResult> Like(Guid postId)
         {
@@ -102,7 +108,7 @@ namespace MiniSocialNetwork.Api.Controllers
             return Ok(result.Message);
         }
 
-        [Route("{id:Guid}/unlike")]
+        [Route("{postId:Guid}/unlike")]
         [HttpPut]
         public async Task<IHttpActionResult> Unlike(Guid postId)
         {

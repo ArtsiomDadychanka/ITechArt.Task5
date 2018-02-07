@@ -24,7 +24,8 @@ namespace MiniSocialNetwork.Api.Configs
                 .ForMember("Username", opt => opt.MapFrom(f => $"{f.Firstname} {f.Lastname}"));
 
             cfg.CreateMap<CreatedPostViewModel, PostDTO>();
-            cfg.CreateMap<PostDTO, DisplayedPostViewModel>();
+            cfg.CreateMap<PostDTO, DisplayedPostViewModel>()
+                .ForMember("LikeCounts", opt => opt.MapFrom(f => f.Likes));
 
             cfg.CreateMap<CreatedCommentViewModel, CommentDTO>();
             cfg.CreateMap<CommentDTO, DisplayedCommentViewModel>();
