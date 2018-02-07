@@ -3,10 +3,10 @@ import ProfilePhoto from './profilePhoto';
 import ProfileActions from './profileActions';
 import ProfileMyActions from './profileMyActions';
 
-const ProfileMainInfo = ({ username = 'username', isSelf = true }) => {
+const ProfileMainInfo = ({ username = 'username', isSelf = true, userId }) => {
   const actions = isSelf ?
     (<ProfileMyActions username={username} />) :
-    (<ProfileActions username={username} />);
+    (<ProfileActions userId={userId} username={username} />);
 
   return (
     <div className="profile-main-info">

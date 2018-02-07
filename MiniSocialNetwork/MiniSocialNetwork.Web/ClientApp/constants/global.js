@@ -15,7 +15,7 @@ export const URI_REGEXP_PATTERN = /{.*}/gi;
 export const PAGES_URL = {
   LOGIN: `Login`,
   USER_PROFILE: `Profile/Index`,
-  MESSAGES: `Messages`,
+  MESSAGES: `Messages/Index`,
   SUBSCRIBERS: `Subscribers`,
   SETTINGS: `Settings`,
   ADMIN: `Admin`,

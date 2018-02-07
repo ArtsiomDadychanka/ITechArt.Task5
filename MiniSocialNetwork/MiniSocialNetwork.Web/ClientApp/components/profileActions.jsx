@@ -2,7 +2,7 @@ import React from 'react';
 import ChatButton from './buttons/chatButton';
 import FollowingButton from './buttons/followingButton';
 
-const ProfileActions = ({ username = 'User name' }) => {
+const ProfileActions = ({ username = 'User name', userId }) => {
   return (
     <div className="profile-actions blue-grey darken-4">
       <div className="row">
@@ -10,7 +10,7 @@ const ProfileActions = ({ username = 'User name' }) => {
       </div>
       <div className="row">
         <FollowingButton />
-        <ChatButton />
+        <ChatButton userId={userId} />
       </div>
     </div>
   );

@@ -97,7 +97,7 @@ export default function postReducer(state = {}, action) {
       }
     case types.CREATE_COMMENT_SUCCESS:
       {
-        const posts = [...state.posts];
+        const posts = JSON.parse(JSON.stringify(state.posts));
         const createdComment = action.data;
         let changedPost = posts.find((p) => {
           const post = p.post;
@@ -131,7 +131,7 @@ export default function postReducer(state = {}, action) {
       }
     case types.DELETE_COMMENT_SUCCESS:
       {
-        const posts = [...state.posts];
+        const posts = JSON.parse(JSON.stringify(state.posts));
         const {
           id,
           postId

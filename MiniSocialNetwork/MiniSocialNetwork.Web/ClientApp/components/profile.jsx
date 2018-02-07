@@ -57,7 +57,7 @@ class Profile extends React.Component {
 
     return (
       <div className="profile row">
-        <ProfileSidebar isSelf={isSelf} username={username} />
+        <ProfileSidebar userId={userId} isSelf={isSelf} username={username} />
         <Wall posts={posts} />
         <SubscribersSidebar />
       </div>

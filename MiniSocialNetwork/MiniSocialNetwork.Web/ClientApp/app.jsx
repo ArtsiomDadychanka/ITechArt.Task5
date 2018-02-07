@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import SignIn from './containers/signInContainer';
 import SignUp from './containers/signUpContainer';
 import Profile from './containers/profileContainer';
+import MessagesPage from './containers/messagesPageContainer';
 import ErrorPage from './components/errorPage';
 import * as global from './constants/global';
 import {
@@ -33,6 +34,9 @@ function renderProfile(userId) {
 function renderError() {
   return (<ErrorPage />);
 }
+function renderMessages(userId) {
+  return (<MessagesPage userId={userId} />);
+}
 
 function componentSubstitution() {
   const rootComponent = (
@@ -40,14 +44,16 @@ function componentSubstitution() {
   );
   const url = window.location.href.replace(global.SERVER_ADDRESS, '');
   const location = window.location.href;
-  const idRegExp = /Profile\/Index\//gi;
+  const profileIdRegExp = /Profile\/Index\//gi;
+  const messagesIdRegExp = /Messages\/Index\//gi;
 
-  if (idRegExp.exec(location) !== null) {
-    console.log('URL');
-    console.log(location);
-    console.log(idRegExp);
-    return renderProfile(location.substring(idRegExp.lastIndex))
+  if (profileIdRegExp.exec(location) !== null) {
+    return renderProfile(location.substring(profileIdRegExp.lastIndex));
   }
+  if (messagesIdRegExp.exec(location) !== null) {
+    return renderMessages(location.substring(messagesIdRegExp.lastIndex));
+  }
+
 
   switch (url) {
     case global.PAGES_URL.LOGIN: {

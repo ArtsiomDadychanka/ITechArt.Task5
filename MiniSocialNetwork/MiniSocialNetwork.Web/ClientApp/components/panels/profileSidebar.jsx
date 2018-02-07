@@ -17,12 +17,11 @@ class ProfileSidebar extends React.Component {
 
 
   render() {
-    const { username } = this.props;
-    const { isSelf } = this.props;
+    const { username, isSelf, userId } = this.props;
 
     return (
       <div className="profile-sidebar col s2 blue-grey darken-2">
-        <ProfileMainInfo isSelf={isSelf} username={username} />
+        <ProfileMainInfo userId={userId} isSelf={isSelf} username={username} />
         <ActivityBar />
       </div>
     );
