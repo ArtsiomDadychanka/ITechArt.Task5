@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Entities;
 using MiniSocialNetwork.Dal.Exceptions;
@@ -19,7 +20,7 @@ namespace MiniSocialNetwork.Dal.Repositories
             return Database.UserPosts.Add(post);
         }
 
-        public async void DeleteAsync(String id)
+        public async Task DeleteAsync(String id)
         {
             Post postToDelete = await Database.UserPosts.FindAsync(id);
             if (postToDelete == null)
@@ -39,7 +40,7 @@ namespace MiniSocialNetwork.Dal.Repositories
             return Database.UserPosts.Where(p => p.AuthorId == id).AsNoTracking();
         }
 
-        public async void Like(String postId)
+        public async Task Like(String postId)
         {
             Post likedPost = await Database.UserPosts.FindAsync(postId);
             if (likedPost == null)
@@ -47,9 +48,10 @@ namespace MiniSocialNetwork.Dal.Repositories
                 throw new PostNotFoundException();
             }
 
-            likedPost.Likes += 1;
+            likedPost.Likes++;
+            Database.Entry(likedPost).State = EntityState.Modified;
         }
-        public async void Unlike(String postId)
+        public async Task Unlike(String postId)
         {
             Post unlikedPost = await Database.UserPosts.FindAsync(postId);
             if (unlikedPost == null)
@@ -59,7 +61,8 @@ namespace MiniSocialNetwork.Dal.Repositories
 
             if (unlikedPost.Likes > 0)
             {
-                unlikedPost.Likes -= 1;
+                unlikedPost.Likes--;
+                Database.Entry(unlikedPost).State = EntityState.Modified;
             }
         }
     }

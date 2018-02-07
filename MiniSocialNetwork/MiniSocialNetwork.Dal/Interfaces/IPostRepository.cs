@@ -10,10 +10,10 @@ namespace MiniSocialNetwork.Dal.Interfaces
     public interface IPostRepository : IDisposable
     {
         Post Create(Post post);
-        void DeleteAsync(String id);
+        Task DeleteAsync(String id);
         IQueryable<Post> GetAll();
         IQueryable<Post> GetUsersPosts(String id);
-        void Like(String postId);
-        void Unlike(String postId);
+        Task Like(String postId);
+        Task Unlike(String postId);
     }
 }

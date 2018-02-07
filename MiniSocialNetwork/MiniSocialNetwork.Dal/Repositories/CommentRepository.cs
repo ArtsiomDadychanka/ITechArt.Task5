@@ -22,7 +22,7 @@ namespace MiniSocialNetwork.Dal.Repositories
             return Database.Comments.Add(post);
         }
 
-        public async void DeleteAsync(String id)
+        public async Task DeleteAsync(String id)
         {
             Comment commentToDelete = await Database.Comments.FindAsync(id);
             if (commentToDelete == null)
