@@ -26,12 +26,12 @@ export function getPosts(userId) {
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.GET_USER_POSTS_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }
@@ -62,12 +62,12 @@ export function createPost(post) {
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.CREATE_POST_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }
@@ -79,7 +79,7 @@ export function removePost(postId) {
       data: null,
     });
 
-    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.POSTS}`, {
+    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.POSTS}/${postId}`, {
         mode: 'cors',
         method: 'delete',
         headers: global.authorizeHeaders
@@ -90,10 +90,11 @@ export function removePost(postId) {
         }
         dispatch({
           type: types.DELETE_POSTS_SUCCESS,
-          data: null
+          data: postId
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.DELETE_POSTS_REJECT,
           data: null,
@@ -128,17 +129,17 @@ export function likePost(postId) {
         if (res.status === 200) {
           dispatch({
             type: types.LIKE_POSTS_SUCCESS,
-            data: null
+            data: postId
           });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.LIKE_POSTS_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }
@@ -168,11 +169,12 @@ export function unlikePost(postId) {
         if (res.status === 200) {
           dispatch({
             type: types.UNLIKE_POSTS_SUCCESS,
-            data: null
+            data: postId
           });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.UNLIKE_POSTS_REJECT,
           data: null,

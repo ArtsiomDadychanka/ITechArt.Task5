@@ -1,7 +1,14 @@
 import React from 'react';
-import Post from './post';
+import Post from '../containers/postContainer';
 
 class Posts extends React.Component {
+  static get defaultProps() {
+    return {
+      posts: [],
+      comments: [],
+    }
+  }
+
   constructor(props) {
     super(props);
 
@@ -15,9 +22,10 @@ class Posts extends React.Component {
   render() {
     const { posts = [], comments = [], onRemoveBtnClick } = this.props;
 
-    const userPosts = posts.map((post) => {
+    const userPosts = posts.slice().map((postWithComments) => {
+      const { post } = postWithComments;
       return (
-        <Post onRemoveBtnClick={onRemoveBtnClick} key={post.post.id} post={post} />
+        <Post onRemoveBtnClick={onRemoveBtnClick} key={post.id} post={postWithComments} />
       )
     });
 

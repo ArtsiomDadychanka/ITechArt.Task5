@@ -26,12 +26,12 @@ export function getComments(postId) {
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.GET_COMMENTS_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }
@@ -62,24 +62,25 @@ export function createComment(comment) {
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.CREATE_COMMENT_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }
 
-export function removeComment(commentId) {
+// comment - object, which contain post id and comment id
+export function removeComment(comment) {
   return (dispatch) => {
     dispatch({
       type: types.DELETE_COMMENT_REQUEST,
       data: null,
     });
 
-    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.COMMENTS}`, {
+    fetch(`${global.SERVER_API_ADDRESS}${global.SERVER_API_URI.COMMENTS}/${comment.id}`, {
         mode: 'cors',
         method: 'delete',
         headers: global.authorizeHeaders
@@ -90,16 +91,16 @@ export function removeComment(commentId) {
         }
         dispatch({
           type: types.DELETE_COMMENT_SUCCESS,
-          data: null
+          data: comment
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.DELETE_COMMENT_REJECT,
           data: null,
           error: err,
         });
-        console.log(err);
       });
   };
 }

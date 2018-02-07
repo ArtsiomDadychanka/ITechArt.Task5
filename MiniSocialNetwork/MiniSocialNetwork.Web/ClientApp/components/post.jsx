@@ -5,19 +5,35 @@ import CommentButton from './buttons/commentButton';
 import Comments from '../components/comments';
 
 class Post extends React.Component {
+  static get defaultProps() {
+    return {
+      post: {}
+    }
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('NEXT');
+  }
+
   componentDidMount() {
-
-
     $(document).ready(function () {
       $('.collapsible').collapsible();
     });
   }
 
+
   render() {
+
     const { post, onRemoveBtnClick } = this.props;
+    const { likePost, unlikePost } = this.props.postsActions;
     const { authorName, text, postedDate, likeCounts, id } = post.post;
     const { comments } = post;
-
+    console.log('INIT');
+    likeCounts === 8 && alert("asdad");
     return (
       <div className="post row">
         <div className="row">
@@ -35,7 +51,7 @@ class Post extends React.Component {
           </div>
           <div className="post__buttons row col s3">
             <div className="post__like">
-              <LikeButton />
+              <LikeButton postId={id} unlike={unlikePost} like={likePost} />
               <span className="post__counter">
                 {likeCounts}
               </span>
@@ -44,13 +60,13 @@ class Post extends React.Component {
             </div>
           </div>
           <div className="col s1">
-            <a onClick={() => { onRemoveBtnClick(id) }}>
+            <a className="post__remove-btn" onClick={() => { onRemoveBtnClick(id) }}>
               <i className="material-icons">clear</i>
             </a>
           </div>
         </div>
         <div className="post__comments row">
-          <Comments comments={comments} />
+          <Comments postId={id} comments={comments} />
         </div>
       </div>
     );

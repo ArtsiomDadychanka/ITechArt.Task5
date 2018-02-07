@@ -1,15 +1,20 @@
 import React from 'react';
-import Comment from './comment';
-import NewComment from './newComment';
+import NewComment from '../containers/newCommentContainer';
+import Comment from '../containers/commentContainer';
 
 class Comments extends React.Component {
 
   render() {
-    const { comments } = this.props;
+    const { comments, postId } = this.props;
 
     const postComments = comments ?
       comments.map((comment) => {
-        return (<Comment key={comment.id} comment={comment} />);
+        return (
+          <Comment
+            postId={postId}
+            key={comment.id}
+            comment={comment}
+          />);
       }) :
       [];
 
@@ -24,7 +29,7 @@ class Comments extends React.Component {
               </div>
           <div className="collapsible-body">
             {postComments}
-            <NewComment />
+            <NewComment postId={postId} />
           </div>
         </li>
       </ul>

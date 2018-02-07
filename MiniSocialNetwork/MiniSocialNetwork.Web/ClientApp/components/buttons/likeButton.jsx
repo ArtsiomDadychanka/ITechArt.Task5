@@ -1,11 +1,50 @@
 import React from 'react';
+class LikeButton extends React.Component {
+  static get defaultProps() {
+    return {
+      postId: ''
+    }
+  }
 
-const LikeButton = ({ styles = '' }) => {
-  return (
-    <a className={`like-button ${styles}`}>
-      <i className="material-icons">favorite_border</i>
-    </a>
-  );
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLiked: false,
+    };
+  }
+
+  like = () => {
+    const { postId } = this.props;
+    const { like, unlike } = this.props;
+
+    if (!this.state.isLiked) {
+      like(postId);
+
+      this.setState({
+        isLiked: !this.state.isLiked
+      });
+    } else {
+      unlike(postId);
+
+      this.setState({
+        isLiked: !this.state.isLiked
+      });
+    }
+  }
+
+
+  render() {
+    const buttonState = this.state.isLiked ? 'favorite' : 'favorite_border';
+    return (
+      <a
+        onClick={this.like}
+        className={`like-button`}
+      >
+        <i className="material-icons">{buttonState}</i>
+      </a>
+    );
+  }
 }
 
 export default LikeButton;

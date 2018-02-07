@@ -3,6 +3,18 @@ import ProfileMainInfo from '../profileMainInfo';
 import ActivityBar from './activityBar';
 
 class ProfileSidebar extends React.Component {
+  static get defaultProps() {
+    return {
+      username: 'username',
+      isSelf: true,
+    };
+  }
+
+  constructor(props) {
+    super(props);
+
+  }
+
 
   render() {
     const { username } = this.props;

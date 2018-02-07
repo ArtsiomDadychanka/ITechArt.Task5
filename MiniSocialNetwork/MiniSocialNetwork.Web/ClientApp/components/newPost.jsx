@@ -1,6 +1,12 @@
 import React from 'react';
 
 class NewPost extends React.Component {
+  static get defaultProps() {
+    return {
+      currentUserId: ''
+    }
+  }
+
   constructor(props) {
     super(props);
 

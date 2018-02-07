@@ -3,7 +3,7 @@ import ProfilePhoto from './profilePhoto';
 import ProfileActions from './profileActions';
 import ProfileMyActions from './profileMyActions';
 
-const ProfileMainInfo = ({ username, isSelf }) => {
+const ProfileMainInfo = ({ username = 'username', isSelf = true }) => {
   const actions = isSelf ?
     (<ProfileMyActions username={username} />) :
     (<ProfileActions username={username} />);

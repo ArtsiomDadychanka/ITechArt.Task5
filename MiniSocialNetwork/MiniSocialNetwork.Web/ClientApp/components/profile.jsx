@@ -5,6 +5,14 @@ import Wall from '../containers/wallContainer';
 import * as  global from '../constants/global';
 
 class Profile extends React.Component {
+  static get defaultProps() {
+    return {
+      userId: '',
+      user: {},
+      posts: [],
+    };
+  }
+
   constructor(props) {
     super(props);
   }
@@ -36,6 +44,8 @@ class Profile extends React.Component {
       )
     }
     const { posts } = this.props;
+    console.log('PL');
+    console.log(posts.length);
     const { username } = user;
 
     const { userId } = this.props;

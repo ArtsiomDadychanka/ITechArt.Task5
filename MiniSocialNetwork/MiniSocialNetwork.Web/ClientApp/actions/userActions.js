@@ -34,6 +34,7 @@ export function loadUserInfo(userId) {
         });
       })
       .catch(err => {
+        console.log(err);
         dispatch({
           type: types.GET_USER_INFO_REJECT,
           data: null,

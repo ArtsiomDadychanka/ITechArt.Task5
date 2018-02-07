@@ -3,6 +3,13 @@ import NewPost from './newPost';
 import Posts from '../components/posts';
 
 class Wall extends React.Component {
+  static get defaultProps() {
+    return {
+      posts: [],
+      currentUserId: '',
+    };
+  }
+
   constructor(props) {
     super(props);
   }
@@ -31,7 +38,7 @@ class Wall extends React.Component {
           currentUserId={currentUserId}
           onAddPostBtnClick={this.onAddPostBtnClick}
         />
-        <Posts onRemoveBtnClick={onRemoveBtnClick} posts={posts} />
+        <Posts onRemoveBtnClick={this.onRemoveBtnClick} posts={posts} />
       </div>
     );
   }
