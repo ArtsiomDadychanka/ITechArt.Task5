@@ -23,14 +23,18 @@ namespace MiniSocialNetwork.Dal.Repositories
             PostRepository = new PostRepository(db);
             CommentRepository = new CommentRepository(db);
             UserRepository = new UserRepository(db);
+            DialogRepository = new DialogRepository(db);
+            MessagesRepository = new MessagesRepository(db);
         }
 
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
         public IUserProfileManager ProfileManager { get; }
         public IPostRepository PostRepository { get; }
-        public ICommentRepository CommentRepository { get; set; }
+        public ICommentRepository CommentRepository { get; }
         public IUserRepository UserRepository { get; }
+        public IDialogRepository DialogRepository { get; }
+        public IMessagesRepository MessagesRepository { get; }
 
         public async Task SaveAsync()
         {
@@ -54,8 +58,11 @@ namespace MiniSocialNetwork.Dal.Repositories
                     UserManager.Dispose();
                     RoleManager.Dispose();
                     ProfileManager.Dispose();
+                    UserRepository.Dispose();
                     PostRepository.Dispose();
                     CommentRepository.Dispose();
+                    DialogRepository.Dispose();
+                    MessagesRepository.Dispose();
                 }
                 this.disposed = true;
             }

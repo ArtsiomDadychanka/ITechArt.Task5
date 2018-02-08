@@ -11,6 +11,8 @@ namespace MiniSocialNetwork.Dal.EF
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Post> UserPosts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Dialog> Dialogs { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         static ApplicationContext()
         {

@@ -15,6 +15,8 @@ namespace MiniSocialNetwork.Dal.Interfaces
         IPostRepository PostRepository { get; }
         ICommentRepository CommentRepository { get; }
         IUserRepository UserRepository { get; }
+        IDialogRepository DialogRepository { get; }
+        IMessagesRepository MessagesRepository { get; }
         Task SaveAsync();
     }
 }
