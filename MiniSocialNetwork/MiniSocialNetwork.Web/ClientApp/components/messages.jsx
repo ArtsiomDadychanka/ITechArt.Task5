@@ -6,25 +6,31 @@ import ChatHeader from '../components/chatHeader';
 class Messages extends Component {
   static get defaultProps() {
     return {
-      user: {}
-    }
+      user: {},
+      messages: []
+    };
   }
 
   constructor(props) {
     super(props);
 
+
+  }
+
+  sendMessageHandler = (message) => {
+
   }
 
 
   render() {
-    const { user } = this.props;
+    const { user, messages } = this.props;
 
     return (
       <div className="messages">
         <ChatHeader
-        // username={user.username} 
+          username={user.username}
         />
-        <Chat />
+        <Chat messages={messages} />
         <NewMessage />
       </div>
     );

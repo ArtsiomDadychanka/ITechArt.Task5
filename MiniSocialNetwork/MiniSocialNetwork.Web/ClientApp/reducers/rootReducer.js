@@ -4,11 +4,11 @@ import {
 import sign from './signReducer';
 import user from './userReducer';
 import posts from './postsReducer';
-import comments from './commentsReducer';
+import messages from './messagesReducer';
 
 export default combineReducers({
   sign,
   user,
   posts,
-  // comments,
+  messages
 });

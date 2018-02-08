@@ -6,14 +6,18 @@ class MessagesPage extends React.Component {
   static get defaultProps() {
     return {
       userId: '',
-      user: {}
+      user: {},
+      messages: {
+        messages: []
+      }
     };
   }
 
   constructor(props) {
     super(props);
-
   }
+
+
 
   componentDidMount() {
     const { loadUserInfo } = this.props.userActions;
@@ -24,16 +28,17 @@ class MessagesPage extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
-    // const { username } = user;
+    const { user, messages } = this.props;
+    const { username } = user;
+    const userMessages = messages.messages;
 
     return (
       <div className="messages-page row">
         <ProfileSidebar
-          // username={username}
+          username={username}
           isSelf={false}
         />
-        <Messages user={user} />
+        <Messages messages={userMessages} user={user} />
       </div>
     );
   }

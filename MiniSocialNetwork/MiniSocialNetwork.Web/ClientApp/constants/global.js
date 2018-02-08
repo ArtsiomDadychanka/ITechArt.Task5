@@ -8,7 +8,8 @@ export const SERVER_API_URI = {
   POSTS_LIKE: `/posts/{id}/like`,
   POSTS_UNLIKE: `/posts/{id}/unlike`,
   USER_INFO: `/users/{id}`,
-  COMMENTS: `/comments`
+  COMMENTS: `/comments`,
+  MESSAGES: `/messages`,
 };
 export const URI_REGEXP_PATTERN = /{.*}/gi;
 

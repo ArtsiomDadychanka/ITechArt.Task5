@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import Comment from '../components/comment';
 import * as commentsActions from '../actions/commentsActions';
 
-function mapStateToProps(state) {
-  return {
-  };
-}
+const mapStateToProps = state => { };
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -5,7 +5,6 @@ import * as userActions from '../actions/userActions';
 
 function mapStateToProps(state) {
   return {
-    // currentUserId: state.user.user.id,
     user: state.user.user,
     isFetching: state.user.isFetching,
   };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Message = ({ isOwn = false }) => {
+const Message = ({ isOwn = false, text = 'some text', time = '' }) => {
   const whose = isOwn ?
     'message_own' :
     'message_else';
@@ -8,7 +8,9 @@ const Message = ({ isOwn = false }) => {
   return (
     <div className={`message ${whose}`}>
       <div className="message__text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius obcaecati ullam quam tempora, dolorum esse repellat ex, in inventore provident mollitia saepe vitae, alias et natus id itaque! Harum, impedit!
+        {text}
+        <br />
+        {time}
       </div>
     </div>
   );

@@ -20,17 +20,17 @@ class LikeButton extends React.Component {
 
     if (!this.state.isLiked) {
       like(postId);
-
-      this.setState({
-        isLiked: !this.state.isLiked
-      });
+      this.likeUpdate();
     } else {
       unlike(postId);
-
-      this.setState({
-        isLiked: !this.state.isLiked
-      });
+      this.likeUpdate();
     }
+  }
+
+  likeUpdate = () => {
+    this.setState({
+      isLiked: !this.state.isLiked
+    });
   }
 
 
