@@ -12,6 +12,7 @@ using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Interfaces;
 using MiniSocialNetwork.Dal.Repositories;
 using MiniSocialNetwork.Shared;
+using MiniSocialNetwork.Web.Hubs;
 
 namespace MiniSocialNetwork.Api.Configs
 {
@@ -19,6 +20,9 @@ namespace MiniSocialNetwork.Api.Configs
     {
         public static void Register(ContainerBuilder builder)
         {
+            builder.RegisterType<ChatHub>()
+                .AsSelf();
+
             RegisterApiLayer(builder);
             RegisterServices(builder);
             RegisterDlLayer(builder);

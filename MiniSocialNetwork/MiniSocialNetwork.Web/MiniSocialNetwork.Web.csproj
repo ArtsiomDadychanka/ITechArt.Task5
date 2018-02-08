@@ -189,6 +189,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Models\MessageDetails.cs" />
+    <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -229,7 +231,6 @@
     <Folder Include="content\fonts\" />
     <Folder Include="content\images\" />
     <Folder Include="content\style\components\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>

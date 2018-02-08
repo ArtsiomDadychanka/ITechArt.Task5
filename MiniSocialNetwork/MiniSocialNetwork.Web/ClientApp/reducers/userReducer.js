@@ -2,7 +2,9 @@ import * as types from '../actions/actionTypes';
 
 const initState = {
   isFetching: true,
-  user: null
+  user: {
+    username: ''
+  }
 };
 
 export default function userReducer(state = initState, action) {
@@ -12,7 +14,6 @@ export default function userReducer(state = initState, action) {
         const newState = {
           ...state,
           isFetching: true,
-          user: null
         }
         return newState;
       }
@@ -30,7 +31,6 @@ export default function userReducer(state = initState, action) {
         const newState = {
           ...state,
           isFetching: false,
-          user: null,
           error: action.error
         }
         return newState;

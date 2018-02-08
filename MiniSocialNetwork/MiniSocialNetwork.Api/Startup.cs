@@ -46,7 +46,7 @@ namespace MiniSocialNetwork.Api
             app.UseCors(CorsOptions.AllowAll);
 
             httpConfig.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            
+            //app.MapSignalR();
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(httpConfig);
             app.UseWebApi(httpConfig);

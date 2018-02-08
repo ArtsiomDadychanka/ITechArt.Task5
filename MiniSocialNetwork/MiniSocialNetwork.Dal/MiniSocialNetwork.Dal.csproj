@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201802011449239_RemoveAuthorNameFromDomainModel.Designer.cs">
       <DependentUpon>201802011449239_RemoveAuthorNameFromDomainModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802081528185_UpdateDb.cs" />
+    <Compile Include="Migrations\201802081528185_UpdateDb.Designer.cs">
+      <DependentUpon>201802081528185_UpdateDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommentRepository.cs" />
@@ -152,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802011449239_RemoveAuthorNameFromDomainModel.resx">
       <DependentUpon>201802011449239_RemoveAuthorNameFromDomainModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802081528185_UpdateDb.resx">
+      <DependentUpon>201802081528185_UpdateDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

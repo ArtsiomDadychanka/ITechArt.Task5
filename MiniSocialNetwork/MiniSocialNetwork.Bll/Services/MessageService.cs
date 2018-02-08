@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MiniSocialNetwork.Bll.DTO;
@@ -38,9 +39,10 @@ namespace MiniSocialNetwork.Bll.Services
         public async Task<IEnumerable<MessageDTO>> GetMessagesByDialogId(string dialogId)
         {
             var messages = await Uow.MessagesRepository.GetMessagesByDialogId(dialogId).ToListAsync();
+            
             IEnumerable<MessageDTO> messageDtos = Mapper.Map<IEnumerable<Message>, IEnumerable<MessageDTO>>(messages);
 
-            return messageDtos;
+            return messageDtos.OrderBy(m => m.Time);
         }
     }
 }

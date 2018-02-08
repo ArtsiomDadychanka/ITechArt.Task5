@@ -38,3 +38,6 @@ export const authorizeHeaders = new Headers({
   'Content-Type': 'application/json',
   'Authorization': token
 });
+
+// hub
+export const HUB_NAME = 'chatHub';

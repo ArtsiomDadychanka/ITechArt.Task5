@@ -5,7 +5,7 @@ using System.Web;
 using Owin;
 using Microsoft.Owin;
 
-[assembly: OwinStartup(typeof(MiniSocialNetwork.Web.Startup))]
+//[assembly: OwinStartup(typeof(MiniSocialNetwork.Web.Startup))]
 namespace MiniSocialNetwork.Web
 {
     public class Startup

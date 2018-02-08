@@ -196,6 +196,10 @@
       <Project>{1e7fef2b-1610-4515-917b-918f45511bc6}</Project>
       <Name>MiniSocialNetwork.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiniSocialNetwork.Web\MiniSocialNetwork.Web.csproj">
+      <Project>{0aaed5ec-5325-429f-9726-8e16da96c598}</Project>
+      <Name>MiniSocialNetwork.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

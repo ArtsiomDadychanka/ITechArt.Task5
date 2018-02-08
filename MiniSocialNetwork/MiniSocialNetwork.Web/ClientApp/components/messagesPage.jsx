@@ -1,12 +1,15 @@
 import React from 'react';
 import ProfileSidebar from './panels/profileSidebar';
 import Messages from '../components/messages';
+import * as global from '../constants/global';
 
 class MessagesPage extends React.Component {
   static get defaultProps() {
     return {
       userId: '',
-      user: {},
+      user: {
+        username: 'user name'
+      },
       messages: {
         messages: []
       }
@@ -25,6 +28,12 @@ class MessagesPage extends React.Component {
     loadUserInfo(userId);
 
     //TODO: load messages
+
+    // открываем соединение с сервером
+    let currentUserId = sessionStorage.getItem(global.TOKEN_KEY);
+
+    $.connection.hub.start().done();
+    $.connection[global.HUB_NAME].server.connect(currentUserId, userId);
   }
 
   render() {
