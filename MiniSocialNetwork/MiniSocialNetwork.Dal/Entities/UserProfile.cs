@@ -8,21 +8,22 @@ namespace MiniSocialNetwork.Dal.Entities
     public class UserProfile
     {
         [Key]
-        [ForeignKey("ApplicationUser")]
-        public String Id { get; set; }
-        public String Firstname { get; set; } 
-        public String Lastname { get; set; } 
+        [ForeignKey(nameof(ApplicationUser))]
+        public string Id { get; set; }
+        public string Firstname { get; set; } 
+        public string Lastname { get; set; } 
         public DateTime RegistrationDate { get; set; } 
         public DateTime Birthday { get; set; } 
-        public Boolean Sex { get; set; } 
-        public String Hometown { get; set; }
-        public String Country { get; set; }
-        public String Interests { get; set; }
-        public String AboutMe { get; set; }
-        public String FavoriteMusic { get; set; } 
-        public Byte[] Avatar { get; set; }
+        public bool Sex { get; set; } 
+        public string Hometown { get; set; }
+        public string Country { get; set; }
+        public string Interests { get; set; }
+        public string AboutMe { get; set; }
+        public string FavoriteMusic { get; set; } 
+        public byte[] Avatar { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Dialog> Dialogs { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using MiniSocialNetwork.Dal.Entities;
 
 namespace MiniSocialNetwork.Dal.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository: IDisposable
     {
         Task<UserProfile> GetUserByIdAsync(String id);
         IQueryable<UserProfile> GetUsersAsync();
