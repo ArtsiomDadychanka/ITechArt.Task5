@@ -14,18 +14,7 @@ namespace MiniSocialNetwork.Dal.EF
         public DbSet<Dialog> Dialogs { get; set; }
         public DbSet<Message> Messages { get; set; }
 
-        static ApplicationContext()
-        {
-            //System.Data.Entity.Database.SetInitializer(new ContextInitializer());
-        }
-        // TODO: remove explicit connection string
-        // i did it for migrations
-        public ApplicationContext() : base("Server=.;initial catalog=SocialNetwork;Integrated Security=true;")
-        {
-            
-        }
-
-        public ApplicationContext(string connectionString) : base(connectionString)
+        public ApplicationContext() : base("Name=SocialNetworkDbContext")
         {
         }
     }
