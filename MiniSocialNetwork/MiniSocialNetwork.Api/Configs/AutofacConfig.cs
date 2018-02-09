@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web;
 using Autofac;
 using Autofac.Integration.WebApi;
+using MiniSocialNetwork.Api.Hubs;
 using MiniSocialNetwork.Api.Providers;
 using MiniSocialNetwork.Bll.Interfaces;
 using MiniSocialNetwork.Bll.Services;
@@ -12,7 +13,6 @@ using MiniSocialNetwork.Dal.EF;
 using MiniSocialNetwork.Dal.Interfaces;
 using MiniSocialNetwork.Dal.Repositories;
 using MiniSocialNetwork.Shared;
-using MiniSocialNetwork.Web.Hubs;
 
 namespace MiniSocialNetwork.Api.Configs
 {
@@ -33,7 +33,9 @@ namespace MiniSocialNetwork.Api.Configs
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<AuthorizationServerProvider>()
-                .AsSelf();
+                .PropertiesAutowired()
+                .AsSelf()
+                .SingleInstance();
 
             builder.RegisterType<Startup>()
                 .AsSelf()
@@ -44,19 +46,18 @@ namespace MiniSocialNetwork.Api.Configs
         {
             builder.RegisterAssemblyTypes(typeof(AuthService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
-                .AsImplementedInterfaces();
-            //.InstancePerRequest();
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
         }
         private static void RegisterDlLayer(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationContext>()
                 .AsSelf()
-                .WithParameter("connectionString", SharedConfiguration.ConnectionString);
-                //.InstancePerRequest();
+                .InstancePerRequest();
 
             builder.RegisterType<UnitOfWork>()
-                .As<IUnitOfWork>();
-            //.InstancePerRequest();
+                .As<IUnitOfWork>()
+            .InstancePerRequest();
         }
     }
 }
