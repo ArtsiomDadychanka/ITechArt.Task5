@@ -32,8 +32,9 @@ class MessagesPage extends React.Component {
     // открываем соединение с сервером
     let currentUserId = sessionStorage.getItem(global.TOKEN_KEY);
 
-    $.connection.hub.start().done();
-    $.connection[global.HUB_NAME].server.connect(currentUserId, userId);
+    $.connection.hub.start()
+      .done(() => { console.log('Now connected, ID=' + $.connection.hub.id); })
+      .fail(function () { console.log('Could not Connect!'); });
   }
 
   render() {
