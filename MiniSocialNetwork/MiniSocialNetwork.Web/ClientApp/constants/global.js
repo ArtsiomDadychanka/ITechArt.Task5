@@ -1,6 +1,6 @@
-export const SERVER_ADDRESS = 'http://localhost:62795/';
-export const SERVER_API_ADDRESS = 'http://localhost:56889' + '/api';
-export const SERVER_TOKEN_ADDRESS = `http://localhost:56889/token`;
+export const SERVER_ADDRESS = 'http://localhost/';
+export const SERVER_API_ADDRESS = 'http://localhost/services' + '/api';
+export const SERVER_TOKEN_ADDRESS = `http://localhost/services/token`;
 export const SERVER_API_URI = {
   SIGNIN: `/account/signin`,
   SIGNUP: `/account/signup`,
