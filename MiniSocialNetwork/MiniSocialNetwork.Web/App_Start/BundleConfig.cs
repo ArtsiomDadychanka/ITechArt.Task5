@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Optimization;
 
 namespace MiniSocialNetwork.Web
@@ -15,8 +16,7 @@ namespace MiniSocialNetwork.Web
                 "~/node_modules/jquery/dist/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
-                "~/Scripts/jquery.signalR-2.2.2.min.js",
-                "~/signalr/hubs"));
+                "~/services/Scripts/jquery.signalR-2.2.2.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
                 "~/public/bundle.js"));
