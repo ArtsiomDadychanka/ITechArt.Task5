@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
+using Autofac;
+using Autofac.Integration.Owin;
 using AutoMapper;
 using Microsoft.Owin.Security;
 using MiniSocialNetwork.Api.Models;
@@ -16,27 +18,34 @@ namespace MiniSocialNetwork.Api.Providers
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        private IAuthService userService;
+        private IAuthService authService;
 
-        public AuthorizationServerProvider(IAuthService userService)
+        public IAuthService AuthService
         {
-            this.userService = userService;
+            get => authService;
+            set => authService = value;
         }
+
+        public AuthorizationServerProvider()
+        {
+        }
+
 
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
+            var autofacLifetimeScope = OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
+            authService = autofacLifetimeScope.Resolve<IAuthService>();
             context.Validated();
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            Debug.WriteLine("qwe");
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             LoginViewModel login = new LoginViewModel() {Email = context.UserName, Password = context.Password};
             UserDTO userToAuth = Mapper.Map<LoginViewModel, UserDTO>(login);
 
-            var result = await userService.AuthenticateAsync(userToAuth);
+            var result = await authService.AuthenticateAsync(userToAuth);
             if (result == null)
             {
                 context.SetError("Invalid_grant", "The user name or password is incorrect.");
